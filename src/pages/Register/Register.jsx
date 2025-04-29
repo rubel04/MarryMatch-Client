@@ -1,8 +1,44 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 const Register = () => {
+  const { registerUser } = useAuth();
+  const handleRegisterUser = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const image = form.image.value;
+    const password = form.password.value;
+    const userData = { name, email, image, password };
+    console.log(userData);
+    registerUser(email, password)
+      .then((data) => {
+        console.log(data.user);
+        if (data.user) {
+          Swal.fire({
+            icon:"success",
+            title: "Account register successfully.",
+            timer: 1500
+          })
+          form.reset();
+        }
+       
+      })
+      .catch(() => {
+        Swal.fire({
+          icon:"error",
+          title: "Something went wrong!",
+          timer: 1500
+        })
+      });
+  };
   return (
     <div className="flex h-screen justify-center items-center">
-      <form className="flex max-w-sm w-sm flex-col gap-4 shadow-xl px-10 py-6 text-sm">
+      <form
+        onSubmit={handleRegisterUser}
+        className="flex max-w-sm w-sm flex-col gap-4 shadow-xl px-10 py-6 text-sm"
+      >
         <h3 className="text-xl font-medium text-center mb-4">
           Register account
         </h3>
