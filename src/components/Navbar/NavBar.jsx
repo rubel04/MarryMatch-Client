@@ -5,10 +5,12 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
+import { useLocation } from "react-router-dom";
 const NavBar = () => {
+  const {pathname} = useLocation();
   return (
-    <div className="w-7xl mx-auto">
-      <Navbar  fluid rounded>
+    <div className="w-7xl mx-auto ">
+      <Navbar className={pathname !== '/' ? "bg-[#F1494C] mt-4":  'bg-none'} fluid rounded>
       <NavbarBrand>
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           MarryMatch
@@ -16,7 +18,7 @@ const NavBar = () => {
       </NavbarBrand>
       <NavbarToggle />
       <NavbarCollapse>
-        <NavbarLink href="#" active>
+        <NavbarLink href="/" active>
           Home
         </NavbarLink>
         <NavbarLink href="#">About</NavbarLink>
