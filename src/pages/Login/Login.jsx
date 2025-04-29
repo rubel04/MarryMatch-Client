@@ -46,16 +46,18 @@ const Login = () => {
           </Link>
         </div>
         <button
-          className="p-2 bg-[#F1494C] rounded text-white font-medium"
+          className="p-2 bg-[#F1494C] rounded text-white font-medium cursor-pointer"
           type="submit"
         >
           Login
         </button>
-        
+
         <hr className="mb-4 mt-2" />
         <p className="text-center">
-          New to MarryMatch?{" "}
-          <Link to="/register" className="text-[#4169E1]/90 font-medium ml-3">Register Now</Link>
+          New to MarryMatch?
+          <Link to="/register" className="text-[#4169E1]/90 font-medium ml-3">
+            Register Now
+          </Link>
         </p>
       </form>
     </div>

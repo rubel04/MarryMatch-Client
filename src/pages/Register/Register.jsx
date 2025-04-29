@@ -51,7 +51,7 @@ const Register = () => {
           />
         </div>
         <button
-          className="p-2 bg-[#F1494C] rounded text-white font-medium"
+          className="p-2 bg-[#F1494C] rounded text-white font-medium cursor-pointer"
           type="submit"
         >
           Register
