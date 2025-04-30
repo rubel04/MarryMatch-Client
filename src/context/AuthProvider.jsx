@@ -29,7 +29,7 @@ const AuthProvider = (props) => {
 
   const loginUserWithGoogle = () => {
     setLoading(true);
-    return signInWithPopup(googleProvider, auth);
+    return signInWithPopup(auth, googleProvider);
   };
 
   const updateUser = (data) => {

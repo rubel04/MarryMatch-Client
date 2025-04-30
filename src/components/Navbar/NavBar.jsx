@@ -53,7 +53,7 @@ const NavBar = () => {
           <NavbarLink href="/about">About Us</NavbarLink>
           <NavbarLink href="/contact">Contact Us</NavbarLink>
           {user ? (
-            <button onClick={handleLogout}>Log Out</button>
+            <button className="cursor-pointer" onClick={handleLogout}>Log Out</button>
           ) : (
             <NavbarLink href="/login">Login</NavbarLink>
           )}
