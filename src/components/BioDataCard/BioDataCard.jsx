@@ -1,4 +1,3 @@
-import { Card } from "flowbite-react";
 
 const BioDataCard = (props) => {
   const { bioData } = props;
@@ -11,7 +10,7 @@ const BioDataCard = (props) => {
     permanentDivision,
   } = bioData;
   return (
-    <div className="overflow-hidden shadow hover:shadow-xl">
+    <div className="overflow-hidden shadow hover:shadow-md">
       <div>
         <img className="w-full h-56 object-cover" src={profileImage} alt="profile image" />
       </div>
