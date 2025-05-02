@@ -32,9 +32,9 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-7xl mx-auto ">
+    <div className="w-7xl mx-auto">
       <Navbar
-        className={pathname !== "/" ? "bg-[#F1494C] mt-4" : "bg-none"}
+        className={`${pathname !== "/" ? "bg-[#F1494C] mt-4" : "bg-none"}`}
         fluid
         rounded
       >

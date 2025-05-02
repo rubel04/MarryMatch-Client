@@ -17,7 +17,7 @@ const PremiumMembers = () => {
 
   return (
     <div className="w-7xl mx-auto mb-12">
-      <SectionHeading headings="Premium Members" highlight="second" />
+      <SectionHeading headings="Premium Members" desc="Meet verified premium members, find your match." highlight="second" />
       <div className="mb-8">
         <label htmlFor="sort" className="block mb-2 font-medium text-gray-800">
           Sort by Age:
