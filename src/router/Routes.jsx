@@ -3,6 +3,8 @@ import MainLayout from "../layout/MainLayout/MainLayout";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Home from "../pages/Home/Home/Home";
+import BioDataDetails from "../pages/BioDataDetails/BioDataDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,11 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register/>
+            },
+            {
+                path: "biodata/info/:id",
+                element: <PrivateRoute><BioDataDetails/></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/biodata/${params.id}`)
             }
         ]
     }

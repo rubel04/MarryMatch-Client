@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 const Login = () => {
   const { loginUser } = useAuth();
+  const navigate = useNavigate();
+  const {state} = useLocation();
   const handleLoginUser = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -21,6 +23,7 @@ const Login = () => {
             timer: 1500,
           });
           form.reset();
+          state? navigate(state) : navigate("/");
         }
       })
       .catch(() => {

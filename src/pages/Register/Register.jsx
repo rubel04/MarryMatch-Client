@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 const Register = () => {
   const { registerUser } = useAuth();
+  const navigate = useNavigate();
+  const {state} = useLocation();
+  
   const handleRegisterUser = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,6 +25,7 @@ const Register = () => {
             timer: 1500
           })
           form.reset();
+          state? navigate(state) : navigate("/");
         }
        
       })

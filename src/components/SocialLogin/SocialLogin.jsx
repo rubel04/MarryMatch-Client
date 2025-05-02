@@ -1,9 +1,12 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { loginUserWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const {state} = useLocation();
   const handleLogin = () => {
     loginUserWithGoogle().then((data) => {
       if (data.user) {
@@ -12,6 +15,7 @@ const SocialLogin = () => {
           title: "Account login successfully.",
           timer: 1500,
         });
+        state? navigate(state) : navigate("/");
       }
     }).catch(err => {
         console.log(err);

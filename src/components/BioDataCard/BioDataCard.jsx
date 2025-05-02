@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 
 const BioDataCard = (props) => {
   const { bioData } = props;
   const {
+    biodataId,
     biodataType,
     name,
     profileImage,
@@ -21,7 +23,9 @@ const BioDataCard = (props) => {
         <p><span className="font-semibold">Occupation:</span> {occupation}</p>
         <p><span className="font-semibold">Permanent Division:</span> {permanentDivision}</p>
       <div className="mt-4">
+      <Link to={`/biodata/info/${biodataId}`}>
       <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 w-full rounded cursor-pointer">View Profile</button>
+      </Link>
       </div>
       </div>
 
