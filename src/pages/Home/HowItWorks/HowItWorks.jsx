@@ -26,7 +26,7 @@ const HowItWorks = () => {
   ];
   return (
     <section className="bg-gray-50 mb-12 pb-20 pt-8">
-      <SectionHeading headings="How MarryMatch Works" desc="Find your life partner in 3 simple steps." highlight="second" />
+      <SectionHeading heading1="How" heading2="MarryMatch Works" desc="Find your life partner in 3 simple steps." highlight="second" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-7xl mx-auto text-center">
         {steps.map((step, idx) => (
           <div
