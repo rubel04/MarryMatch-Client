@@ -19,7 +19,7 @@ const Footers = () => {
   return (
     <div>
       <Footer container>
-        <div className="w-full">
+        <div className="w-7xl mx-auto">
           <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
             <div>
             <h3 className="text-xl font-medium">MarryMatch</h3>

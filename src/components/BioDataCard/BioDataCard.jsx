@@ -17,7 +17,8 @@ const BioDataCard = (props) => {
         <img className="w-full h-56 object-cover" src={profileImage} alt="profile image" />
       </div>
       <div className="text-sm text-gray-600 p-4">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">{name}</h3>
+        <p><span className="font-semibold text-xs">Bio Data ID:</span> #{biodataId}</p>
+        <h3 className="text-xl font-bold text-gray-800 mb-3">{name}</h3>
         <p><span className="font-semibold">Gender:</span> {biodataType}</p>
         <p><span className="font-semibold">Age:</span> {age}</p>
         <p><span className="font-semibold">Occupation:</span> {occupation}</p>

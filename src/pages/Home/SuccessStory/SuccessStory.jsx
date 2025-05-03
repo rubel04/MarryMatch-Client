@@ -18,7 +18,8 @@ const SuccessStory = () => {
   });
   console.log(successStory);
   return (
-    <section className="w-4xl mx-auto">
+    <section className="mb-12 bg-gray-100">
+    <div className="w-4xl mx-auto">
       <div>
         <SectionHeading
           heading1="Success"
@@ -26,11 +27,10 @@ const SuccessStory = () => {
           highlight="second"
         />
       </div>
-
       <Swiper className="mySwiper">
         {successStory.map((story) => (
           <SwiperSlide key={story._id}>
-            <div className="cursor-pointer">
+            <div className="cursor-pointer mb-12">
               <img
                 className="h-72 w-full object-cover"
                 src={story.image}
@@ -54,6 +54,7 @@ const SuccessStory = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+    </div>
     </section>
   );
 };
