@@ -31,7 +31,7 @@ const SuccessCounter = () => {
             <p>Male</p>
           </div>
         </div>
-        <div className="bg-pink-400 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className="bg-[#F1494C]/80 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <FaFemale />
           </span>
@@ -40,7 +40,7 @@ const SuccessCounter = () => {
             <p>Female</p>
           </div>
         </div>
-        <div className="bg-amber-400 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className="bg-indigo-500 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <FaHeart className="text-red-600" />
           </span>
