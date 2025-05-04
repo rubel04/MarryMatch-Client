@@ -49,6 +49,36 @@ const ManageUsers = () => {
       }
     });
   };
+  const handleMakePremium = (email) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to make premium this user.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/users/premium?email=${email}`)
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              Swal.fire({
+                text: "Make premium successfully",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              text: err.message,
+              icon: "success",
+            });
+          });
+      }
+    });
+  };
   return (
     <div>
       <h2 className="text-3xl font-medium">All registered users</h2>
@@ -87,10 +117,11 @@ const ManageUsers = () => {
                   </TableCell>
                   <TableCell>{user?.userEmail}</TableCell>
                   <TableCell>
+                    {/* TODO: get original make premium request */}
                     <button
-                      // onClick={() =>
-                      // //   handleDeleteFavouriteUser(user?.userId)
-                      // }
+                      onClick={() =>
+                        handleMakePremium(user?.userEmail)
+                      }
                       className="font-medium text-blue-500 underline cursor-pointer"
                     >
                       Make Premium
