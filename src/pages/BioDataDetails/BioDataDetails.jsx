@@ -1,8 +1,12 @@
 import React from "react";
+import { IoCall } from "react-icons/io5";
+import { MdOutlineMailOutline } from "react-icons/md";
 import { useLoaderData } from "react-router-dom";
 
 const BioDataDetails = () => {
-    const bioData = useLoaderData();
+  const bioData = useLoaderData();
+
+  const isPremiumUser = false;
 
   const {
     biodataId,
@@ -26,24 +30,25 @@ const BioDataDetails = () => {
     mobile,
   } = bioData || {};
   return (
-    <div className="w-7xl mx-auto p-4 sm:p-8 bg-white shadow-lg rounded-xl mt-10">
+    <div className="w-7xl mx-auto my-10">
       <div className="flex flex-col lg:flex-row items-center gap-8">
-        {/* Profile Image */}
-        <div className="w-48 h-48 rounded-full overflow-hidden shadow-md">
+        {/* profile image */}
+        <div className="h-48 w-48 rounded-full overflow-hidden shadow-md">
           <img
-            src={profileImage}
-            alt={name}
             className="w-full h-full object-cover"
+            src={profileImage}
+            alt="profile image"
           />
         </div>
-
-        {/* Basic Info */}
-        <div className="flex-1 text-center lg:text-left">
+        {/* basic info */}
+        <div className="flex-1 text-center md:text-left">
           <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
-          <p className="text-gray-500 text-sm mt-1">
-            Biodata ID: #{biodataId} • {biodataType}
+          <p className="text-gray-500 text-sm mt-1 flex items-center gap-1">
+            Biodata ID: #{biodataId}{" "}
+            <span className="w-1.5 h-1.5 rounded-full inline-block bg-green-500"></span>{" "}
+            {biodataType}
           </p>
-          <div className="mt-4 flex flex-wrap gap-4 justify-center lg:justify-start text-sm">
+          <div className="mt-4 text-sm flex flex-wrap gap-4 justify-center md:justify-start">
             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
               Age: {age}
             </span>
@@ -51,13 +56,12 @@ const BioDataDetails = () => {
               Occupation: {occupation}
             </span>
             <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full">
-              Division: {permanentDivision}
+              Permanent Division: {permanentDivision}
             </span>
           </div>
         </div>
+        {/* details */}
       </div>
-
-      {/* Details Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8 text-gray-700">
         <div>
           <h4 className="font-semibold mb-1 text-gray-600">Father's Name</h4>
@@ -86,28 +90,47 @@ const BioDataDetails = () => {
           <p>{presentDivision}</p>
         </div>
         <div>
-          <h4 className="font-semibold mb-1 text-gray-600">Expected Partner Age</h4>
+          <h4 className="font-semibold mb-1 text-gray-600">
+            Expected Partner Age
+          </h4>
           <p>{expectedPartnerAge}</p>
         </div>
         <div>
-          <h4 className="font-semibold mb-1 text-gray-600">Expected Partner Height</h4>
+          <h4 className="font-semibold mb-1 text-gray-600">
+            Expected Partner Height
+          </h4>
           <p>{expectedPartnerHeight}</p>
         </div>
         <div>
-          <h4 className="font-semibold mb-1 text-gray-600">Expected Partner Weight</h4>
+          <h4 className="font-semibold mb-1 text-gray-600">
+            Expected Partner Weight
+          </h4>
           <p>{expectedPartnerWeight}</p>
         </div>
       </div>
-
-      {/* Contact Section */}
-      <div className="mt-10 border-t pt-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">Contact Information</h3>
-        <p>
-          📧 <a href={`mailto:${email}`} className="text-blue-600">{email}</a>
+      {/* contact for premium users */}
+      <div className="mt-10">
+      <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 px-6 rounded cursor-pointer">Add to Favorite</button>
+      {
+        isPremiumUser ? <div className="border-t border-gray-300 pt-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+          Contact Information
+        </h3>
+        <p className="flex items-center gap-1">
+          <MdOutlineMailOutline />
+          Email:
+          <a href={`mailto:${email}`} className="text-blue-600">
+            {email}
+          </a>
         </p>
-        <p>
-          📞 <span className="text-gray-700">{mobile}</span>
+        <p className="flex items-center gap-1">
+          <IoCall />
+          Call: <span className="text-gray-700">{mobile}</span>
         </p>
+      </div>
+      :
+      <p className="text-red-500 text-center">Contact information can only be seen by premium users!!</p>
+      }
       </div>
     </div>
   );
