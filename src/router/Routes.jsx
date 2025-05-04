@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import BioDatas from "../pages/BioDatas/BioDatas";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import ViewBiodata from "../pages/Dashboard/ViewBiodata/ViewBiodata";
+import FavoriteBiodata from "../pages/Dashboard/FavoriteBiodata/FavoriteBiodata";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +49,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ViewBiodata/>
+        element: <PrivateRoute><ViewBiodata/></PrivateRoute>
       },
       {
         path: "view-biodata",
-        element: <ViewBiodata/>
+        element: <PrivateRoute><ViewBiodata/></PrivateRoute>
+      },
+      {
+        path: "favourites",
+        element: <PrivateRoute><FavoriteBiodata/></PrivateRoute>
       }
     ]
   }
