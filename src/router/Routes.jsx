@@ -9,6 +9,7 @@ import BioDatas from "../pages/BioDatas/BioDatas";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import ViewBiodata from "../pages/Dashboard/ViewBiodata/ViewBiodata";
 import FavoriteBiodata from "../pages/Dashboard/FavoriteBiodata/FavoriteBiodata";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -47,10 +48,10 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <PrivateRoute><Dashboard/></PrivateRoute>,
     children: [
-      {
-        index: true,
-        element: <PrivateRoute><ViewBiodata/></PrivateRoute>
-      },
+      // {
+      //   index: true,
+      //   element: <PrivateRoute><ViewBiodata/></PrivateRoute>
+      // },
       {
         path: "view-biodata",
         element: <PrivateRoute><ViewBiodata/></PrivateRoute>
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
       {
         path: "favourites",
         element: <PrivateRoute><FavoriteBiodata/></PrivateRoute>
+      },
+      // admin dashboard
+      {
+        path: "",
+        element: <PrivateRoute><AdminDashboard/></PrivateRoute>
       }
     ]
   }

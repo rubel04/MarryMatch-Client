@@ -8,10 +8,12 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAdmin from "../../hooks/useAdmin";
 const NavBar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { user, logoutUser } = useAuth();
+  const [isAdmin] = useAdmin();
   const handleLogout = () => {
     logoutUser()
       .then(() => {
@@ -49,7 +51,8 @@ const NavBar = () => {
           <NavbarLink href="/" active>
             Home
           </NavbarLink>
-          {user && <NavbarLink href="/dashboard">Dashboard</NavbarLink>}
+          {user && isAdmin && <NavbarLink href="/dashboard">Dashboard</NavbarLink>}
+          {user && !isAdmin && <NavbarLink href="/dashboard/view-biodata">Dashboard</NavbarLink>}
           <NavbarLink href="/biodatas">Biodatas</NavbarLink>
           <NavbarLink href="/about">About Us</NavbarLink>
           <NavbarLink href="/contact">Contact Us</NavbarLink>
