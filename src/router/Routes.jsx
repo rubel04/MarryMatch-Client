@@ -10,6 +10,7 @@ import Dashboard from "../layout/Dashboard/Dashboard";
 import ViewBiodata from "../pages/Dashboard/ViewBiodata/ViewBiodata";
 import FavoriteBiodata from "../pages/Dashboard/FavoriteBiodata/FavoriteBiodata";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <PrivateRoute><AdminDashboard/></PrivateRoute>
+      },
+      {
+        path: "manage-users",
+        element: <PrivateRoute><ManageUsers/></PrivateRoute>
       }
     ]
   }
