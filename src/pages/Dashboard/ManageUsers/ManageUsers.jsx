@@ -8,14 +8,16 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const [search,setSearch] = useState('')
   const { data: users = [] } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users",search],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users`);
+      const res = await axiosSecure.get(`/users?search=${search}`);
       return res.data;
     },
   });
@@ -91,6 +93,7 @@ const ManageUsers = () => {
           Search user by username
         </label>
         <input
+        onChange={e => setSearch(e.target.value)}
           className="border border-gray-300 rounded p-1.5 pl-2 md:w-3/11 w-full"
           name="search"
           placeholder="Type username"
