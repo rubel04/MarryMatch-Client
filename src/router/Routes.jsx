@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home/Home";
 import BioDataDetails from "../pages/BioDataDetails/BioDataDetails";
 import PrivateRoute from "./PrivateRoute";
 import BioDatas from "../pages/BioDatas/BioDatas";
+import Dashboard from "../layout/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard/>,
+    children: [
+      {
+        path: ""
+      }
+    ]
+  }
 ]);
 
 export default router;

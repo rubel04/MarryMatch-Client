@@ -1,12 +1,18 @@
 import React from "react";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const BioDataDetails = () => {
   const bioData = useLoaderData();
-
+  const axiosSecure = useAxiosSecure();
+  
+  // TODO: get original premium user
   const isPremiumUser = false;
+  const {user} = useAuth();
 
   const {
     biodataId,
@@ -29,6 +35,32 @@ const BioDataDetails = () => {
     email,
     mobile,
   } = bioData || {};
+
+
+  // add biodata to the favorite list
+  const handleAddToFavorite = () =>{
+    const newFavoriteBiodata = {...bioData, userName: user?.displayName, userEmail: user?.email};
+
+    axiosSecure.post("/favoriteBiodata", newFavoriteBiodata)
+    .then(res => {
+      if(res.data.insertedId){
+        Swal.fire({
+          title: "Biodata add to the favorite list",
+          icon: "success",
+          timer: 2000
+        })
+      }
+    })
+    .catch(() => {
+      Swal.fire({
+        title: "Something went wrong",
+        text: "try again",
+        icon: "error",
+        timer: 2000
+      })
+    })
+  }
+
   return (
     <div className="w-7xl mx-auto my-10">
       <div className="flex flex-col lg:flex-row items-center gap-8">
@@ -110,27 +142,40 @@ const BioDataDetails = () => {
       </div>
       {/* contact for premium users */}
       <div className="mt-10">
-      <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 px-6 rounded cursor-pointer">Add to Favorite</button>
-      {
-        isPremiumUser ? <div className="border-t border-gray-300 pt-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">
-          Contact Information
-        </h3>
-        <p className="flex items-center gap-1">
-          <MdOutlineMailOutline />
-          Email:
-          <a href={`mailto:${email}`} className="text-blue-600">
-            {email}
-          </a>
-        </p>
-        <p className="flex items-center gap-1">
-          <IoCall />
-          Call: <span className="text-gray-700">{mobile}</span>
-        </p>
-      </div>
-      :
-      <p className="text-red-500 text-center">Contact information can only be seen by premium users!!</p>
-      }
+        {isPremiumUser ? (
+          <div className="border-t border-gray-300 pt-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              Contact Information
+            </h3>
+            <p className="flex items-center gap-1">
+              <MdOutlineMailOutline />
+              Email:
+              <a href={`mailto:${email}`} className="text-blue-600">
+                {email}
+              </a>
+            </p>
+            <p className="flex items-center gap-1">
+              <IoCall />
+              Call: <span className="text-gray-700">{mobile}</span>
+            </p>
+            <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold mt-2 p-2 px-6 rounded cursor-pointer">
+              Add to Favorite
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-center gap-4 mt-4">
+            <button onClick={handleAddToFavorite} className="border border-[#F1494C] text-[#F1494C] hover:bg-[#f1494c]/10 font-semibold px-5 py-2 cursor-pointer rounded-lg transition">
+              Add to Favorite
+            </button>
+
+            {/* redirect to the checkout page when user click the button */}
+            <Link to={`/checkout/${biodataId}`}>
+              <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-semibold px-5 py-2 cursor-pointer rounded-lg transition">
+                Request Contact Information
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
