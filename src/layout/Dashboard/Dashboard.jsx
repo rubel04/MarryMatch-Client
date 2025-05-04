@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
@@ -25,6 +25,7 @@ const Dashboard = () => {
   return (
     <div className="bg-gray-50">
       <div className="w-7xl min-h-screen mx-auto grid grid-cols-4 gap-6">
+        {/* side menubar */}
         <div className="col-span-1 py-6 px-4 bg-white">
           <ul className="flex flex-col justify-between h-full">
             <div className="space-y-4">
@@ -34,7 +35,7 @@ const Dashboard = () => {
               <li className="font-medium rounded p-2 hover:bg-gray-50">
                 <NavLink className={({isActive}) => isActive && 'text-[#d9383b]'} to="/dashboard/edit-biodata">Edit Biodata</NavLink>
               </li>
-              <li className="font-medium rounded p-2 hover:bg-gray-50">
+              <li className="font-medium rounded p-2 hover:bg-gray-50 text-[#d9383b]">
                 <NavLink className={({isActive}) => isActive && 'text-[#d9383b]'} to="/dashboard/view-biodata">View Biodata</NavLink>
               </li>
               <li className="font-medium rounded p-2 hover:bg-gray-50">
@@ -53,7 +54,10 @@ const Dashboard = () => {
             </li>
           </ul>
         </div>
-        <div className="col-span-3 py-6 bg-white"></div>
+        {/* main content */}
+        <div className="col-span-3 py-6 bg-white">
+            <Outlet></Outlet>
+        </div>
       </div>
     </div>
   );
