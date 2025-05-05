@@ -10,7 +10,7 @@ const BioDatas = () => {
     queryKey: ["all-bioData", filter],
     queryFn: async () => {
       const query = new URLSearchParams(filter).toString();
-      const res = await axiosPublic.get(`/all-biodata?${query}`);
+      const res = await axiosPublic.get(`/biodata?${query}`);
       return res.data;
     },
   });

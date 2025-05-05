@@ -11,6 +11,8 @@ import ViewBiodata from "../pages/Dashboard/ViewBiodata/ViewBiodata";
 import FavoriteBiodata from "../pages/Dashboard/FavoriteBiodata/FavoriteBiodata";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import CreateBiodata from "../pages/Dashboard/CreateBiodata/CreateBiodata";
+import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "favourites",
         element: <PrivateRoute><FavoriteBiodata/></PrivateRoute>
+      },
+      {
+        path: "create-biodata",
+        element: <PrivateRoute><CreateBiodata/></PrivateRoute>
+      },
+      {
+        path: "edit-biodata",
+        element: <PrivateRoute><EditBiodata/></PrivateRoute>
       },
       // admin dashboard
       {

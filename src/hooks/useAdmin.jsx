@@ -1,5 +1,5 @@
 const useAdmin = () => {
-    const isAdmin = true;
+    const isAdmin = false;
     return [isAdmin];
 };
 
