@@ -51,10 +51,6 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <PrivateRoute><Dashboard/></PrivateRoute>,
     children: [
-      // {
-      //   index: true,
-      //   element: <PrivateRoute><ViewBiodata/></PrivateRoute>
-      // },
       {
         path: "view-biodata",
         element: <PrivateRoute><ViewBiodata/></PrivateRoute>
