@@ -1,11 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Register = () => {
-  const { registerUser } = useAuth();
+  const { registerUser, updateUser } = useAuth();
   const navigate = useNavigate();
-  const {state} = useLocation();
-  
+  const { state } = useLocation();
+  const axiosPublic = useAxiosPublic();
+
   const handleRegisterUser = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -13,28 +15,32 @@ const Register = () => {
     const email = form.email.value;
     const image = form.image.value;
     const password = form.password.value;
-    const userData = { name, email, image, password };
+    const userData = { name, email, role:"user" };
     console.log(userData);
     registerUser(email, password)
       .then((data) => {
         console.log(data.user);
-        if (data.user) {
-          Swal.fire({
-            icon:"success",
-            title: "Account register successfully.",
-            timer: 1500
-          })
-          form.reset();
-          state? navigate(state) : navigate("/");
-        }
-       
+        updateUser({ name, image }).then(() => {
+          axiosPublic.post("/users", userData).then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              Swal.fire({
+                icon: "success",
+                title: "Account register successfully.",
+                timer: 1500,
+              });
+              form.reset();
+              state ? navigate(state) : navigate("/");
+            }
+          });
+        });
       })
-      .catch(() => {
+      .catch((err) => {
         Swal.fire({
-          icon:"error",
-          title: "Something went wrong!",
-          timer: 1500
-        })
+          icon: "error",
+          title:err.message ,
+          timer: 1500,
+        });
       });
   };
   return (
