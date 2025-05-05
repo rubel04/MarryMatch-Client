@@ -3,14 +3,16 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useViewBiodata from "../../../hooks/useViewBiodata";
 import noBioData from "../../../assets/no-biodata.json";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EditBiodata = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const [bioData] = useViewBiodata();
   const {
+    biodataId,
     biodataType,
     name,
     profileImage,
@@ -34,15 +36,25 @@ const EditBiodata = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
-    const { ...newBiodata } = initialData;
-    console.log("Submitted:", newBiodata);
+    const { ...updateBiodata } = initialData;
     axiosSecure
-      .post("/biodata", newBiodata)
+      .patch(`/biodata/${biodataId}`, updateBiodata)
       .then((res) => {
-        console.log(res.data);
+        if (res.data?.modifiedCount > 0) {
+          Swal.fire({
+            title: ` Biodata updated successfully!`,
+            text: `Your profile has been saved with the latest information.`,
+            icon: "success",
+          });
+          navigate("/dashboard/view-biodata");
+        }
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          title: ` Biodata updated failed!`,
+          text: err.message,
+          icon: "error",
+        });
       });
   };
   return (
@@ -51,7 +63,8 @@ const EditBiodata = () => {
         <div>
           <h1 className="text-3xl font-bold">Edit Your Biodata</h1>
           <p className="mb-8 mt-1 text-gray-700">
-          You don’t have a biodata yet. Please create one first to be able to edit it.
+            You don’t have a biodata yet. Please create one first to be able to
+            edit it.
           </p>
           <form
             onSubmit={handleSubmit}
@@ -73,7 +86,9 @@ const EditBiodata = () => {
                 required
                 className="mt-1 w-full rounded"
               >
-                <option value="" disabled={true}>Select Gender</option>
+                <option value="" disabled={true}>
+                  Select Gender
+                </option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
@@ -124,8 +139,15 @@ const EditBiodata = () => {
               <label className="block text-sm font-medium text-gray-700">
                 Height
               </label>
-              <select required name="height" defaultValue={height} className="mt-1 w-full rounded">
-                <option value="" disabled={true}>Select Height</option>
+              <select
+                required
+                name="height"
+                defaultValue={height}
+                className="mt-1 w-full rounded"
+              >
+                <option value="" disabled={true}>
+                  Select Height
+                </option>
                 <option value="5.0">5.0 ft</option>
                 <option value="5.5">5.5 ft</option>
                 <option value="6.0">6.0 ft</option>
@@ -136,8 +158,15 @@ const EditBiodata = () => {
               <label className="block text-sm font-medium text-gray-700">
                 Weight
               </label>
-              <select required name="weight" defaultValue={weight} className="mt-1 w-full rounded">
-                <option value="" disabled={true}>Select Weight</option>
+              <select
+                required
+                name="weight"
+                defaultValue={weight}
+                className="mt-1 w-full rounded"
+              >
+                <option value="" disabled={true}>
+                  Select Weight
+                </option>
                 <option value="50">50 kg</option>
                 <option value="60">60 kg</option>
                 <option value="70">70 kg</option>
@@ -148,8 +177,15 @@ const EditBiodata = () => {
               <label className="block text-sm font-medium text-gray-700">
                 Race
               </label>
-              <select required name="race" defaultValue={race} className="mt-1 w-full rounded">
-                <option value="" disabled={true}>Select Race</option>
+              <select
+                required
+                name="race"
+                defaultValue={race}
+                className="mt-1 w-full rounded"
+              >
+                <option value="" disabled={true}>
+                  Select Race
+                </option>
                 <option value="Fair">Fair</option>
                 <option value="Medium">Medium</option>
                 <option value="Light Brown">Light Brown</option>
@@ -179,7 +215,9 @@ const EditBiodata = () => {
                 defaultValue={occupation}
                 className="mt-1 w-full rounded"
               >
-                <option value="" disabled={true}>Select Occupation</option>
+                <option value="" disabled={true}>
+                  Select Occupation
+                </option>
                 <option value="student">Student</option>
                 <option value="engineer">Engineer</option>
                 <option value="doctor">Doctor</option>
@@ -236,7 +274,9 @@ const EditBiodata = () => {
                 defaultValue={permanentDivision}
                 className="mt-1 w-full rounded"
               >
-                <option value="" disabled={true}>Select Division</option>
+                <option value="" disabled={true}>
+                  Select Division
+                </option>
                 <option value="Dhaka">Dhaka</option>
                 <option value="Chattagram">Chattagram</option>
                 <option value="Rangpur">Rangpur</option>
@@ -257,7 +297,9 @@ const EditBiodata = () => {
                 defaultValue={presentDivision}
                 className="mt-1 w-full rounded"
               >
-                <option value="" disabled={true}>Select Division</option>
+                <option value="" disabled={true}>
+                  Select Division
+                </option>
                 <option value="Dhaka">Dhaka</option>
                 <option value="Chattagram">Chattagram</option>
                 <option value="Rangpur">Rangpur</option>
@@ -298,7 +340,9 @@ const EditBiodata = () => {
                 defaultValue={expectedPartnerHeight}
                 className="mt-1 w-full rounded"
               >
-                <option value="" disabled={true}>Select Height</option>
+                <option value="" disabled={true}>
+                  Select Height
+                </option>
                 <option value="5.0">5.0 ft</option>
                 <option value="5.5">5.5 ft</option>
                 <option value="6.0">6.0 ft</option>
@@ -315,7 +359,9 @@ const EditBiodata = () => {
                 defaultValue={expectedPartnerWeight}
                 className="mt-1 w-full rounded"
               >
-                <option value="" disabled={true}>Select Weight</option>
+                <option value="" disabled={true}>
+                  Select Weight
+                </option>
                 <option value="50">50 kg</option>
                 <option value="60">60 kg</option>
                 <option value="70">70 kg</option>
@@ -370,7 +416,8 @@ const EditBiodata = () => {
           <div className="h-full">
             <Lottie className="h-1/2" animationData={noBioData}></Lottie>
             <p className="text-gray-700">
-            You don’t have a biodata yet. Please create one first to be able to edit it.
+              You don’t have a biodata yet. Please create one first to be able
+              to edit it.
             </p>
             <Link to="/dashboard/create-biodata">
               <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 rounded cursor-pointer block m-auto mt-4">

@@ -13,18 +13,17 @@ const CreateBiodata = () => {
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
     const { ...newBiodata } = initialData;
-    console.log("Submitted:", newBiodata);
     axiosSecure
       .post("/biodata", newBiodata)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if(res.data?.result?.insertedId){
           Swal.fire({
             title: ` Biodata created successfully!`,
             text: `Your Biodata ID is: #${res.data?.newBioDataId}`,
             icon: "success"
           })
-          navigate("/view-biodata");
+          navigate("/dashboard/view-biodata");
         }
       })
       .catch((err) => {
