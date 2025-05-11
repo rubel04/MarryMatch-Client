@@ -4,11 +4,13 @@ import noBioData from "../../../assets/no-biodata.json";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import useViewBiodata from "../../../hooks/useViewBiodata";
+import usePremiumUser from "../../../hooks/usePremiumUser";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ViewBiodata = () => {
-  // TODO: get original premium user
-  const isPremiumUser = false;
+  const [isPremiumUser] = usePremiumUser();;
   const [bioData] = useViewBiodata();
+  const axiosSecure = useAxiosSecure();
 
   const {
     biodataId,
@@ -31,6 +33,16 @@ const ViewBiodata = () => {
     email,
     mobile,
   } = bioData || {};
+
+  const handleMakePremium = () =>{
+    axiosSecure.post('/users/make-premium', bioData)
+    .then(res =>{
+      console.log(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
 
   return (
     <div>
@@ -140,7 +152,7 @@ const ViewBiodata = () => {
               </p>
               <div className="flex justify-center mt-8">
                 {isPremiumUser || (
-                  <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 px-6 rounded cursor-pointer">
+                  <button onClick={handleMakePremium} className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 px-6 rounded cursor-pointer">
                     Make Premium Biodata
                   </button>
                 )}
