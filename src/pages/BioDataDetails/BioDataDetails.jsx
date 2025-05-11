@@ -11,6 +11,7 @@ const BioDataDetails = () => {
   const axiosSecure = useAxiosSecure();
   
   // TODO: get original premium user
+  // TODO: create error page/route
   const isPremiumUser = false;
   const {user} = useAuth();
 

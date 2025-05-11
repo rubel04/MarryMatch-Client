@@ -1,11 +1,10 @@
-
 import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const axiosSecure = axios.create({
- baseURL: "http://localhost:5000",
+  baseURL: "http://localhost:5000",
 });
 const useAxiosSecure = () => {
   const { logoutUser } = useAuth();
@@ -30,7 +29,7 @@ const useAxiosSecure = () => {
         logoutUser()
           .then(() => {
             Swal.fire({
-              title: "Session Expired!" ,
+              title: "Session Expired!",
               text: "Please login again to continue using the app",
               icon: "success",
             });
@@ -50,4 +49,3 @@ const useAxiosSecure = () => {
 };
 
 export default useAxiosSecure;
-

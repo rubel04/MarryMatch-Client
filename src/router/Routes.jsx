@@ -13,6 +13,7 @@ import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import CreateBiodata from "../pages/Dashboard/CreateBiodata/CreateBiodata";
 import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -70,11 +71,11 @@ const router = createBrowserRouter([
       // admin dashboard
       {
         path: "",
-        element: <PrivateRoute><AdminDashboard/></PrivateRoute>
+        element: <AdminRoute><AdminDashboard/></AdminRoute>
       },
       {
         path: "manage-users",
-        element: <PrivateRoute><ManageUsers/></PrivateRoute>
+        element: <AdminRoute><ManageUsers/></AdminRoute>
       }
     ]
   }
