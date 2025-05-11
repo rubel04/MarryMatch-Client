@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import useViewBiodata from "../../../hooks/useViewBiodata";
 import usePremiumUser from "../../../hooks/usePremiumUser";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ViewBiodata = () => {
-  const [isPremiumUser] = usePremiumUser();;
+  const [isPremiumUser] = usePremiumUser();
   const [bioData] = useViewBiodata();
   const axiosSecure = useAxiosSecure();
 
@@ -34,15 +35,40 @@ const ViewBiodata = () => {
     mobile,
   } = bioData || {};
 
-  const handleMakePremium = () =>{
-    axiosSecure.post('/users/make-premium', bioData)
-    .then(res =>{
-      console.log(res.data)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-  }
+  const handleMakePremium = () => {
+    axiosSecure
+      .post("/users/make-premium", {
+        biodataId: bioData?.biodataId,
+        email: bioData?.email,
+        status: "pending",
+      })
+      .then((res) => {
+        if (res.data.message) {
+          Swal.fire({
+            title: "Request failed!",
+            text: res.data?.message,
+            icon: "error",
+            timer: 3000,
+          });
+        }
+        if (res.data?.insertedId) {
+          Swal.fire({
+            title: "Request submitted!",
+            text: "You’ll be notified once the admin approves it.",
+            icon: "success",
+            timer: 3000,
+          });
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          title: "Request failed!",
+          text: "Please try again.",
+          icon: "error",
+          timer: 3000,
+        });
+      });
+  };
 
   return (
     <div>
@@ -152,7 +178,10 @@ const ViewBiodata = () => {
               </p>
               <div className="flex justify-center mt-8">
                 {isPremiumUser || (
-                  <button onClick={handleMakePremium} className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 px-6 rounded cursor-pointer">
+                  <button
+                    onClick={handleMakePremium}
+                    className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 px-6 rounded cursor-pointer"
+                  >
                     Make Premium Biodata
                   </button>
                 )}
