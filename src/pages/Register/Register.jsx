@@ -15,7 +15,7 @@ const Register = () => {
     const email = form.email.value;
     const image = form.image.value;
     const password = form.password.value;
-    const userData = { name, email, role:"user" };
+    const userData = { userName: name, userEmail: email, role: "user" };
     console.log(userData);
     registerUser(email, password)
       .then((data) => {
@@ -38,7 +38,7 @@ const Register = () => {
       .catch((err) => {
         Swal.fire({
           icon: "error",
-          title:err.message ,
+          title: err.message,
           timer: 1500,
         });
       });
