@@ -42,7 +42,8 @@ const NavBar = () => {
         rounded
       >
         <NavbarBrand>
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          <span className="flex items-center gap-1 self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+           <img className="w-10" src="https://i.ibb.co.com/VYBdzYWM/images.jpg" alt="logo" />
             MarryMatch
           </span>
         </NavbarBrand>

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import BioDataCard from "../../components/BioDataCard/BioDataCard";
 import { useState } from "react";
+import NoData from "../../components/NoData/NoData";
 
 const BioDatas = () => {
   const axiosPublic = useAxiosPublic();
@@ -15,7 +16,6 @@ const BioDatas = () => {
     },
   });
 
-  //   TODO: fixed filter option
   const handleFilter = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -54,11 +54,11 @@ const BioDatas = () => {
                 name="bioDataType"
                 id=""
               >
-                <option value="type" disabled={true}>
+                <option value="" disabled={true}>
                   Select Type
                 </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
             {/* select division option */}
@@ -77,7 +77,7 @@ const BioDatas = () => {
                 name="division"
                 id=""
               >
-                <option value="type" disabled={true}>
+                <option value="" disabled={true}>
                   Select Division
                 </option>
                 <option value="Dhaka">Dhaka</option>
@@ -124,14 +124,6 @@ const BioDatas = () => {
       </div>
       {/* bio data card */}
       <div className="col-span-3">
-        <div className="mb-4">
-        <input
-          className="border border-gray-300 rounded p-1.5 pl-2 md:w-3/11 w-full"
-          name="search"
-          placeholder="Type biodata no."
-          type="text"
-        />
-        </div>
         {isPending ? (
           <div className="animate-pulse grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="h-24 md:h-42 text-gray-800 bg-gray-200 rounded w-full flex items-center justify-center">
@@ -145,10 +137,15 @@ const BioDatas = () => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div>
+            {bioDatas.length !== 0 ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {bioDatas.map((bioData) => (
               <BioDataCard bioData={bioData} key={bioData._id} />
             ))}
+          </div>
+          :
+          <NoData text="No biodata found!"/>
+          }
           </div>
         )}
       </div>
