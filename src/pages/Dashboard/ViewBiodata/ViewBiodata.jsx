@@ -8,7 +8,7 @@ import NoData from "../../../components/NoData/NoData";
 
 const ViewBiodata = () => {
   const [isPremiumUser] = usePremiumUser();
-  const [bioData,isPending] = useViewBiodata();
+  const [bioData, isPending] = useViewBiodata();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -34,39 +34,50 @@ const ViewBiodata = () => {
   } = bioData || {};
 
   const handleMakePremium = () => {
-    axiosSecure
-      .post("/users/make-premium", {
-        biodataId: bioData?.biodataId,
-        name: bioData?.name,
-        email: bioData?.email,
-        status: "pending",
-      })
-      .then((res) => {
-        if (res.data.message) {
-          Swal.fire({
-            title: "Request failed!",
-            text: res.data?.message,
-            icon: "error",
-            timer: 3000,
+    Swal.fire({
+      title: "Are you sure to make you premium?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .post("/users/make-premium", {
+            biodataId: bioData?.biodataId,
+            name: bioData?.name,
+            email: bioData?.email,
+            status: "pending",
+          })
+          .then((res) => {
+            if (res.data.message) {
+              Swal.fire({
+                title: "Request failed!",
+                text: res.data?.message,
+                icon: "error",
+                timer: 3000,
+              });
+            }
+            if (res.data?.insertedId) {
+              Swal.fire({
+                title: "Request submitted!",
+                text: "You’ll be notified once the admin approves it.",
+                icon: "success",
+                timer: 3000,
+              });
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              title: "Request failed!",
+              text: "Please try again.",
+              icon: "error",
+              timer: 3000,
+            });
           });
-        }
-        if (res.data?.insertedId) {
-          Swal.fire({
-            title: "Request submitted!",
-            text: "You’ll be notified once the admin approves it.",
-            icon: "success",
-            timer: 3000,
-          });
-        }
-      })
-      .catch(() => {
-        Swal.fire({
-          title: "Request failed!",
-          text: "Please try again.",
-          icon: "error",
-          timer: 3000,
-        });
-      });
+      }
+    });
   };
 
   return (
@@ -77,13 +88,20 @@ const ViewBiodata = () => {
             {/* profile image */}
             <div className="relative">
               <div className="h-48 w-48 rounded-full overflow-hidden shadow-md">
-              <img
-                className="w-full h-full object-cover"
-                src={profileImage}
-                alt="profile image"
-              />
-            </div>
-              {isPremiumUser && <span title="Premium Member" className="absolute bottom-4 right-4 bg-[#00D0FF] text-white text-sm text-center h-5 w-5 rounded-full font-bold overflow-hidden cursor-default">P</span>}
+                <img
+                  className="w-full h-full object-cover"
+                  src={profileImage}
+                  alt="profile image"
+                />
+              </div>
+              {isPremiumUser && (
+                <span
+                  title="Premium Member"
+                  className="absolute bottom-4 right-4 bg-[#00D0FF] text-white text-sm text-center h-5 w-5 rounded-full font-bold overflow-hidden cursor-default"
+                >
+                  P
+                </span>
+              )}
             </div>
             {/* basic info */}
             <div className="flex-1 text-center md:text-left">
@@ -192,7 +210,11 @@ const ViewBiodata = () => {
           </div>
         </div>
       ) : (
-        <NoData text="You don’t have a biodata. Click here to create one now." button="Create Biodata" to="/dashboard/create-biodata" />
+        <NoData
+          text="You don’t have a biodata. Click here to create one now."
+          button="Create Biodata"
+          to="/dashboard/create-biodata"
+        />
       )}
     </div>
   );

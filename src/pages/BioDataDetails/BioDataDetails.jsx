@@ -57,8 +57,9 @@ const BioDataDetails = () => {
 
   // add biodata to the favorite list
   const handleAddToFavorite = () => {
+    const { _id, ...restBioData } = bioData;
     const newFavoriteBiodata = {
-      ...bioData,
+      ...restBioData,
       userName: user?.displayName,
       userEmail: user?.email,
     };
@@ -70,7 +71,7 @@ const BioDataDetails = () => {
           Swal.fire({
             title: "Biodata add to the favorite list",
             icon: "success",
-            timer: 2000,
+            timer: 3000,
           });
         }
       })
