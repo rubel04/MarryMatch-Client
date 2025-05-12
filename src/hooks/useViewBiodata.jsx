@@ -7,14 +7,14 @@ const useViewBiodata = () => {
     const { user } = useAuth();
     // TODO: get original premium user
     // const isPremiumUser = false;
-    const { data: bioData = [] } = useQuery({
+    const { data: bioData = [], isPending } = useQuery({
       queryKey: ["user-bioData"],
       queryFn: async () => {
         const res = await axiosSecure.get(`/viewBiodata?email=${user?.email}`);
         return res.data;
       },
     });
-    return [bioData]
+    return [bioData, isPending]
 };
 
 export default useViewBiodata;

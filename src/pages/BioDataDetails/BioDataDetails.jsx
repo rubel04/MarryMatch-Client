@@ -5,14 +5,13 @@ import { Link, useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import usePremiumUser from "../../hooks/usePremiumUser";
 
 const BioDataDetails = () => {
   const bioData = useLoaderData();
   const axiosSecure = useAxiosSecure();
   
-  // TODO: get original premium user
-  // TODO: create error page/route
-  const isPremiumUser = false;
+  const [isPremiumUser] = usePremiumUser();
   const {user} = useAuth();
 
   const {
@@ -159,7 +158,7 @@ const BioDataDetails = () => {
               <IoCall />
               Call: <span className="text-gray-700">{mobile}</span>
             </p>
-            <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold mt-2 p-2 px-6 rounded cursor-pointer">
+            <button onClick={handleAddToFavorite} className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold mt-2 p-2 px-6 rounded cursor-pointer">
               Add to Favorite
             </button>
           </div>

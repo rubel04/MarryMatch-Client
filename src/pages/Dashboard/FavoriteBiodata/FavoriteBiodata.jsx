@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "flowbite-react";
 import Swal from "sweetalert2";
+import NoData from "../../../components/NoData/NoData";
 
 const FavoriteBiodata = () => {
   const axiosSecure = useAxiosSecure();
@@ -24,7 +25,6 @@ const FavoriteBiodata = () => {
     },
   });
   //   TODO: make confirm modal delete button
-  //   TODO: when fovurite biodata is empty, show relevant message
   const handleDeleteFavouriteBiodata = (id) => {
     axiosSecure
       .delete(`/favoriteBiodata/${id}`)
@@ -48,43 +48,54 @@ const FavoriteBiodata = () => {
       });
   };
   return (
-    <div className="overflow-x-auto">
-      <Table hoverable>
-        <TableHead>
-          <TableRow>
-            <TableHeadCell>Name</TableHeadCell>
-            <TableHeadCell>Biodata ID</TableHeadCell>
-            <TableHeadCell>Occupation</TableHeadCell>
-            <TableHeadCell>Permanent Address</TableHeadCell>
-            <TableHeadCell></TableHeadCell>
-          </TableRow>
-        </TableHead>
-        <TableBody className="">
-          {favoriteBiodata.map((biodata) => (
-            <TableRow
-              key={biodata?._id}
-              className="bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {biodata?.name}
-              </TableCell>
-              <TableCell>#{biodata?.biodataId}</TableCell>
-              <TableCell>{biodata?.occupation}</TableCell>
-              <TableCell>{biodata?.permanentDivision}</TableCell>
-              <TableCell>
-                <button
-                  onClick={() =>
-                    handleDeleteFavouriteBiodata(biodata?.biodataId)
-                  }
-                  className="font-medium text-red-500 hover:underline cursor-pointer"
+    <div>
+      {favoriteBiodata.length !== 0 ? (
+        <div className="overflow-x-auto">
+          <Table hoverable>
+            <TableHead>
+              <TableRow>
+                <TableHeadCell>Name</TableHeadCell>
+                <TableHeadCell>Biodata ID</TableHeadCell>
+                <TableHeadCell>Occupation</TableHeadCell>
+                <TableHeadCell>Permanent Address</TableHeadCell>
+                <TableHeadCell></TableHeadCell>
+              </TableRow>
+            </TableHead>
+            <TableBody className="">
+              {favoriteBiodata.map((biodata) => (
+                <TableRow
+                  key={biodata?._id}
+                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
-                  Delete
-                </button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                  <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {biodata?.name}
+                  </TableCell>
+                  <TableCell>#{biodata?.biodataId}</TableCell>
+                  <TableCell>{biodata?.occupation}</TableCell>
+                  <TableCell>{biodata?.permanentDivision}</TableCell>
+                  <TableCell>
+                    <button
+                      onClick={() =>
+                        handleDeleteFavouriteBiodata(biodata?.biodataId)
+                      }
+                      className="bg-red-500 text-white py-1 px-2 cursor-pointer font-medium rounded hover:bg-red-600 transition"
+                    >
+                      Delete
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      ) : (
+        <NoData
+          text="Your favorites list is empty! Add biodatas you like to see them here."
+          button="Add Biodata to Favorite List"
+          to="/biodatas"
+          icon="empty"
+        />
+      )}
     </div>
   );
 };

@@ -1,16 +1,14 @@
 import { MdOutlineMailOutline } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
-import noBioData from "../../../assets/no-biodata.json";
-import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
 import useViewBiodata from "../../../hooks/useViewBiodata";
 import usePremiumUser from "../../../hooks/usePremiumUser";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import NoData from "../../../components/NoData/NoData";
 
 const ViewBiodata = () => {
   const [isPremiumUser] = usePremiumUser();
-  const [bioData] = useViewBiodata();
+  const [bioData,isPending] = useViewBiodata();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -39,6 +37,7 @@ const ViewBiodata = () => {
     axiosSecure
       .post("/users/make-premium", {
         biodataId: bioData?.biodataId,
+        name: bioData?.name,
         email: bioData?.email,
         status: "pending",
       })
@@ -72,16 +71,19 @@ const ViewBiodata = () => {
 
   return (
     <div>
-      {bioData ? (
+      {bioData && !isPending ? (
         <div>
           <div className="flex flex-col lg:flex-row items-center gap-8">
             {/* profile image */}
-            <div className="h-48 w-48 rounded-full overflow-hidden shadow-md">
+            <div className="relative">
+              <div className="h-48 w-48 rounded-full overflow-hidden shadow-md">
               <img
                 className="w-full h-full object-cover"
                 src={profileImage}
                 alt="profile image"
               />
+            </div>
+              {isPremiumUser && <span title="Premium Member" className="absolute bottom-4 right-4 bg-[#00D0FF] text-white text-sm text-center h-5 w-5 rounded-full font-bold overflow-hidden cursor-default">P</span>}
             </div>
             {/* basic info */}
             <div className="flex-1 text-center md:text-left">
@@ -190,19 +192,7 @@ const ViewBiodata = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center h-screen justify-center">
-          <div className="h-full">
-            <Lottie className="h-1/2" animationData={noBioData}></Lottie>
-            <p className="text-gray-700">
-              You don’t have a biodata. Click here to create one now.
-            </p>
-            <Link to="/dashboard/create-biodata">
-              <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 rounded cursor-pointer block m-auto mt-4">
-                Create Biodata
-              </button>
-            </Link>
-          </div>
-        </div>
+        <NoData text="You don’t have a biodata. Click here to create one now." button="Create Biodata" to="/dashboard/create-biodata" />
       )}
     </div>
   );

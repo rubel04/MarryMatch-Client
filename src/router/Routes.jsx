@@ -14,6 +14,8 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import CreateBiodata from "../pages/Dashboard/CreateBiodata/CreateBiodata";
 import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
 import AdminRoute from "./AdminRoute";
+import ApprovedPremium from "../pages/Dashboard/ApprovedPremium/ApprovedPremium";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/biodata/${params.id}`),
       },
     ],
+    errorElement: <ErrorPage/>
   },
   {
     path: "/dashboard",
@@ -76,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <AdminRoute><ManageUsers/></AdminRoute>
+      },
+      {
+        path: 'approved-premium',
+        element: <AdminRoute><ApprovedPremium/></AdminRoute>
       }
     ]
   }

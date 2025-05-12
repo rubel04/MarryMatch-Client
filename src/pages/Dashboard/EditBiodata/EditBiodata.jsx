@@ -1,16 +1,15 @@
-import Lottie from "lottie-react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useViewBiodata from "../../../hooks/useViewBiodata";
-import noBioData from "../../../assets/no-biodata.json";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import NoData from "../../../components/NoData/NoData";
 
 const EditBiodata = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const [bioData] = useViewBiodata();
+  const [bioData, isPending] = useViewBiodata();
   const {
     biodataId,
     biodataType,
@@ -59,7 +58,7 @@ const EditBiodata = () => {
   };
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 bg-gray-50 min-h-screen">
-      {bioData ? (
+      {bioData && !isPending ? (
         <div>
           <h1 className="text-3xl font-bold">Edit Your Biodata</h1>
           <p className="mb-8 mt-1 text-gray-700">
@@ -406,26 +405,18 @@ const EditBiodata = () => {
                 type="submit"
                 className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold py-2 px-6 rounded cursor-pointer block m-auto mt-4"
               >
-                Edit and Publish
+                Edit Biodata
               </button>
             </div>
           </form>
         </div>
       ) : (
-        <div className="flex items-center h-screen justify-center">
-          <div className="h-full">
-            <Lottie className="h-1/2" animationData={noBioData}></Lottie>
-            <p className="text-gray-700">
-              You don’t have a biodata yet. Please create one first to be able
-              to edit it.
-            </p>
-            <Link to="/dashboard/create-biodata">
-              <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold p-2 rounded cursor-pointer block m-auto mt-4">
-                Create Biodata
-              </button>
-            </Link>
-          </div>
-        </div>
+        <NoData
+          text="You don’t have a biodata yet. Please create one first to be able
+              to edit it."
+          button="Create Biodata"
+          to="/dashboard/create-biodata"
+        />
       )}
     </div>
   );

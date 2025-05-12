@@ -10,12 +10,14 @@ import {
 } from "flowbite-react";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import usePremiumRequest from "../../../hooks/usePremiumRequest";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const [search,setSearch] = useState('')
+  const [search, setSearch] = useState("");
+  const [premiumRequest, refetch] = usePremiumRequest();
   const { data: users = [] } = useQuery({
-    queryKey: ["users",search],
+    queryKey: ["users", search],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?search=${search}`);
       return res.data;
@@ -70,6 +72,7 @@ const ManageUsers = () => {
                 text: "Make premium successfully",
                 icon: "success",
               });
+              refetch();
             }
           })
           .catch((err) => {
@@ -93,7 +96,7 @@ const ManageUsers = () => {
           Search user by username
         </label>
         <input
-        onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           className="border border-gray-300 rounded p-1.5 pl-2 md:w-3/11 w-full"
           name="search"
           placeholder="Type username"
@@ -121,19 +124,22 @@ const ManageUsers = () => {
                   <TableCell>{user?.userEmail}</TableCell>
                   <TableCell>
                     {/* TODO: get original make premium request */}
-                    <button
-                      onClick={() =>
-                        handleMakePremium(user?.userEmail)
-                      }
-                      className="font-medium text-blue-500 underline cursor-pointer"
-                    >
-                      Make Premium
-                    </button>
+                    {premiumRequest.map(
+                      (req) =>
+                        user?.userEmail === req?.email && (
+                          <button
+                            onClick={() => handleMakePremium(user?.userEmail)}
+                            className="bg-yellow-600 text-white py-1 px-4 cursor-pointer rounded-full hover:bg-yellow-700 transition"
+                          >
+                            Make Premium
+                          </button>
+                        )
+                    )}
                   </TableCell>
                   <TableCell>
                     <button
                       onClick={() => handleMakeAdmin(user?.userEmail)}
-                      className="font-medium text-green-500 underline cursor-pointer"
+                      className="bg-blue-600 text-white py-1 px-4 cursor-pointer rounded-full hover:bg-blue-700 transition"
                     >
                       Make Admin
                     </button>
