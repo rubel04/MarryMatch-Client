@@ -1,7 +1,7 @@
 import React from "react";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const BioDataDetails = () => {
   const { id } = useParams();
+  const navigate= useNavigate();
   const [isPremiumUser] = usePremiumUser();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -73,6 +74,7 @@ const BioDataDetails = () => {
             icon: "success",
             timer: 3000,
           });
+          navigate("/dashboard/favourites")
         }
       })
       .catch(() => {

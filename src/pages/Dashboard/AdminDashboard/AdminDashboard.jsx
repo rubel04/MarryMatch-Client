@@ -1,8 +1,18 @@
+import { useQuery } from "@tanstack/react-query";
 import { BiMaleFemale } from "react-icons/bi";
 import { FaDollarSign, FaFemale, FaMale } from "react-icons/fa";
 import { MdWorkspacePremium } from "react-icons/md";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdminDashboard = () => {
+  const axiosSecure = useAxiosSecure();
+    const { data: stats = [] } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/admin-stats`);
+      return res.data;
+    },
+  });
   return (
     <div>
       <div>
@@ -15,50 +25,50 @@ const AdminDashboard = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        <div className="bg-lime-500 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className=" bg-gradient-to-r from-lime-500 to-lime-600 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <BiMaleFemale />
           </span>
           <div>
             <p className="font-medium text-gray-100">Total Biodata</p>
-            <h2 className="text-5xl font-bold text-white">1500</h2>
+            <h2 className="text-5xl font-bold text-white">{stats?.totalBiodata}</h2>
           </div>
         </div>
-        <div className="bg-teal-400 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className="bg-gradient-to-r from-teal-400 to-teal-500 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <FaMale />
           </span>
           <div>
             <p className="font-medium text-gray-100">Male</p>
-            <h2 className="text-5xl font-bold text-white">1000</h2>
+            <h2 className="text-5xl font-bold text-white">{stats?.male}</h2>
           </div>
         </div>
-        <div className="bg-indigo-500 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className="bg-gradient-to-r from-indigo-400 to-indigo-500 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <FaFemale />
           </span>
           <div>
             <p className="font-medium text-gray-100">Female</p>
-            <h2 className="text-5xl font-bold text-white">500</h2>
+            <h2 className="text-5xl font-bold text-white">{stats?.female}</h2>
           </div>
         </div>
 
-        <div className="bg-[#d9383b]/90 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className=" bg-gradient-to-r from-[#d9383b]/80 to-[#d9383b] text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <MdWorkspacePremium />
           </span>
           <div>
             <p className="font-medium text-gray-100">Premium Biodata</p>
-            <h2 className="text-5xl font-bold text-white">56</h2>
+            <h2 className="text-5xl font-bold text-white">{stats?.premium}</h2>
           </div>
         </div>
-        <div className="bg-amber-400 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
+        <div className="bg-gradient-to-r from-amber-400 to-amber-500 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <FaDollarSign />
           </span>
           <div>
             <p className="font-medium text-gray-100">Total Revenue</p>
-            <h2 className="text-5xl font-bold text-white">545</h2>
+            <h2 className="text-5xl font-bold text-white">{stats?.revenue}</h2>
           </div>
         </div>
       </div>

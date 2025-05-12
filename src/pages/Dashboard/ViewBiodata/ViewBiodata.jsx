@@ -5,9 +5,12 @@ import usePremiumUser from "../../../hooks/usePremiumUser";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import NoData from "../../../components/NoData/NoData";
+import useAdmin from "../../../hooks/useAdmin";
+import { FaCrown } from "react-icons/fa";
 
 const ViewBiodata = () => {
   const [isPremiumUser] = usePremiumUser();
+  const [isAdmin] = useAdmin();
   const [bioData, isPending] = useViewBiodata();
   const axiosSecure = useAxiosSecure();
 
@@ -100,6 +103,14 @@ const ViewBiodata = () => {
                   className="absolute bottom-4 right-4 bg-[#00D0FF] text-white text-sm text-center h-5 w-5 rounded-full font-bold overflow-hidden cursor-default"
                 >
                   P
+                </span>
+              )}
+              {isAdmin && (
+                <span
+                  title="Admin"
+                  className="absolute bottom-4 right-4 bg-white border text-amber-500 flex items-center justify-center h-6 w-6 rounded-full font-bold overflow-hidden cursor-default"
+                >
+                  <FaCrown />
                 </span>
               )}
             </div>
