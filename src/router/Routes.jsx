@@ -48,60 +48,101 @@ const router = createBrowserRouter([
             <BioDataDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/biodata/${params.id}`),
       },
     ],
-    errorElement: <ErrorPage/>
+    errorElement: <ErrorPage />,
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><Dashboard/></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "view-biodata",
-        element: <PrivateRoute><ViewBiodata/></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <ViewBiodata />
+          </PrivateRoute>
+        ),
       },
       {
         path: "favourites",
-        element: <PrivateRoute><FavoriteBiodata/></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <FavoriteBiodata />
+          </PrivateRoute>
+        ),
       },
       {
         path: "create-biodata",
-        element: <PrivateRoute><CreateBiodata/></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <CreateBiodata />
+          </PrivateRoute>
+        ),
       },
       {
         path: "edit-biodata",
-        element: <PrivateRoute><EditBiodata/></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <EditBiodata />
+          </PrivateRoute>
+        ),
       },
       {
         path: "checkout/:id",
-        element: <PrivateRoute><Payments/></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Payments />
+          </PrivateRoute>
+        ),
       },
       {
         path: "contact-requests",
-        element: <PrivateRoute><MyContactRequest/></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MyContactRequest />
+          </PrivateRoute>
+        ),
       },
       // admin dashboard
       {
         path: "",
-        element: <AdminRoute><AdminDashboard/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-users",
-        element: <AdminRoute><ManageUsers/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
-        path: 'approved-premium',
-        element: <AdminRoute><ApprovedPremium/></AdminRoute>
+        path: "approved-premium",
+        element: (
+          <AdminRoute>
+            <ApprovedPremium />
+          </AdminRoute>
+        ),
       },
       {
         path: "approved-contact",
-        element: <AdminRoute><ApprovedContactRequest/></AdminRoute>
-      }
-    ]
-  }
+        element: (
+          <AdminRoute>
+            <ApprovedContactRequest />
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;
-

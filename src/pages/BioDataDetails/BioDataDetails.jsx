@@ -1,18 +1,37 @@
 import React from "react";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import usePremiumUser from "../../hooks/usePremiumUser";
+import { useQuery } from "@tanstack/react-query";
 
 const BioDataDetails = () => {
-  const bioData = useLoaderData();
-  const axiosSecure = useAxiosSecure();
-  
+  const { id } = useParams();
   const [isPremiumUser] = usePremiumUser();
-  const {user} = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { data: bioData = [] } = useQuery({
+    queryKey: ["bioData-details", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/biodata/${id}`);
+      return res.data;
+    },
+  });
+
+  const { data: similarBiodata = [] } = useQuery({
+    queryKey: ["similar-biodata", bioData?.biodataType],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/biodata/similar/${bioData?.biodataType}?currentId=${id}`
+      );
+      return res.data;
+    },
+  });
+
+  // console.log(similarBiodata);
 
   const {
     biodataId,
@@ -36,30 +55,34 @@ const BioDataDetails = () => {
     mobile,
   } = bioData || {};
 
-
   // add biodata to the favorite list
-  const handleAddToFavorite = () =>{
-    const newFavoriteBiodata = {...bioData, userName: user?.displayName, userEmail: user?.email};
+  const handleAddToFavorite = () => {
+    const newFavoriteBiodata = {
+      ...bioData,
+      userName: user?.displayName,
+      userEmail: user?.email,
+    };
 
-    axiosSecure.post("/favoriteBiodata", newFavoriteBiodata)
-    .then(res => {
-      if(res.data.insertedId){
-        Swal.fire({
-          title: "Biodata add to the favorite list",
-          icon: "success",
-          timer: 2000
-        })
-      }
-    })
-    .catch(() => {
-      Swal.fire({
-        title: "Something went wrong",
-        text: "try again",
-        icon: "error",
-        timer: 2000
+    axiosSecure
+      .post("/favoriteBiodata", newFavoriteBiodata)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Biodata add to the favorite list",
+            icon: "success",
+            timer: 2000,
+          });
+        }
       })
-    })
-  }
+      .catch(() => {
+        Swal.fire({
+          title: "Something went wrong",
+          text: "try again",
+          icon: "error",
+          timer: 2000,
+        });
+      });
+  };
 
   return (
     <div className="w-7xl mx-auto my-10">
@@ -158,13 +181,19 @@ const BioDataDetails = () => {
               <IoCall />
               Call: <span className="text-gray-700">{mobile}</span>
             </p>
-            <button onClick={handleAddToFavorite} className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold mt-2 p-2 px-6 rounded cursor-pointer">
+            <button
+              onClick={handleAddToFavorite}
+              className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-bold mt-2 p-2 px-6 rounded cursor-pointer"
+            >
               Add to Favorite
             </button>
           </div>
         ) : (
           <div className="flex flex-wrap items-center gap-4 mt-4">
-            <button onClick={handleAddToFavorite} className="border border-[#F1494C] text-[#F1494C] hover:bg-[#f1494c]/10 font-semibold px-5 py-2 cursor-pointer rounded-lg transition">
+            <button
+              onClick={handleAddToFavorite}
+              className="border border-[#F1494C] text-[#F1494C] hover:bg-[#f1494c]/10 font-semibold px-5 py-2 cursor-pointer rounded-lg transition"
+            >
               Add to Favorite
             </button>
 
@@ -176,6 +205,40 @@ const BioDataDetails = () => {
             </Link>
           </div>
         )}
+
+        <div className="mt-16">
+          <h4 className="text-xl font-medium text-gray-700 underline mb-3">
+            Similar Biodata
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {similarBiodata.map((item) => (
+              <div
+                key={item._id}
+                className="border border-gray-200 rounded-lg shadow p-3 flex gap-4 items-center"
+              >
+                <img
+                  src={item.profileImage}
+                  alt={item.name}
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <div>
+                  <h5 className="text-lg font-semibold">{item.name}</h5>
+                  <p className="text-sm text-gray-600">ID: #{item.biodataId}</p>
+                  <p className="text-sm text-gray-600">Age: {item.age}</p>
+                  <p className="text-sm text-gray-600">
+                    Division: {item.permanentDivision}
+                  </p>
+                  <Link
+                    to={`/biodata/info/${item.biodataId}`}
+                    className="text-blue-500 hover:text-blue-600 text-sm font-medium underline mt-1 inline-block"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
