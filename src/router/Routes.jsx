@@ -16,6 +16,9 @@ import EditBiodata from "../pages/Dashboard/EditBiodata/EditBiodata";
 import AdminRoute from "./AdminRoute";
 import ApprovedPremium from "../pages/Dashboard/ApprovedPremium/ApprovedPremium";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Payments from "../pages/Payments/Payments";
+import MyContactRequest from "../pages/Dashboard/MyContactRequest/MyContactRequest";
+import ApprovedContactRequest from "../pages/Dashboard/ApprovedContactRequest/ApprovedContactRequest";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +74,14 @@ const router = createBrowserRouter([
         path: "edit-biodata",
         element: <PrivateRoute><EditBiodata/></PrivateRoute>
       },
+      {
+        path: "checkout/:id",
+        element: <PrivateRoute><Payments/></PrivateRoute>
+      },
+      {
+        path: "contact-requests",
+        element: <PrivateRoute><MyContactRequest/></PrivateRoute>
+      },
       // admin dashboard
       {
         path: "",
@@ -83,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: 'approved-premium',
         element: <AdminRoute><ApprovedPremium/></AdminRoute>
+      },
+      {
+        path: "approved-contact",
+        element: <AdminRoute><ApprovedContactRequest/></AdminRoute>
       }
     ]
   }

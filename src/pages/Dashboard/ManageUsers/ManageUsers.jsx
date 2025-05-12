@@ -123,7 +123,6 @@ const ManageUsers = () => {
                   </TableCell>
                   <TableCell>{user?.userEmail}</TableCell>
                   <TableCell>
-                    {/* TODO: get original make premium request */}
                     {premiumRequest.map(
                       (req) =>
                         user?.userEmail === req?.email && (

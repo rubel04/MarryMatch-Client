@@ -169,7 +169,7 @@ const BioDataDetails = () => {
             </button>
 
             {/* redirect to the checkout page when user click the button */}
-            <Link to={`/checkout/${biodataId}`}>
+            <Link to={`/dashboard/checkout/${biodataId}`}>
               <button className="bg-[#F1494C] hover:bg-[#d9383b] text-white font-semibold px-5 py-2 cursor-pointer rounded-lg transition">
                 Request Contact Information
               </button>
