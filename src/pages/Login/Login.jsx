@@ -11,8 +11,6 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    const userData = { email, password };
-    console.log(userData);
     loginUser(email, password)
       .then((data) => {
         console.log(data.user);

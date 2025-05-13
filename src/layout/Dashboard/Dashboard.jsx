@@ -13,6 +13,7 @@ import {
 } from "react-icons/md";
 import { GrContactInfo } from "react-icons/gr";
 import useAdmin from "../../hooks/useAdmin";
+import { FaHandHoldingHand } from "react-icons/fa6";
 
 const Dashboard = () => {
   const { logoutUser } = useAuth();
@@ -197,6 +198,21 @@ const Dashboard = () => {
                       <FaHeart />
                     </span>
                     Favourites Biodata
+                  </NavLink>
+                </li>
+                <li className="font-medium rounded p-2 hover:bg-gray-50">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-[#d9383b] flex items-center gap-3"
+                        : "flex items-center gap-3"
+                    }
+                    to="/dashboard/got-married"
+                  >
+                    <span className="text-white bg-amber-500 text-xl p-1.5 rounded">
+                      <FaHandHoldingHand />
+                    </span>
+                    Got Married
                   </NavLink>
                 </li>
               </div>

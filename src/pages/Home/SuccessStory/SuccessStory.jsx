@@ -16,7 +16,6 @@ const SuccessStory = () => {
       return res.data;
     },
   });
-  console.log(successStory);
   return (
     <section className="mb-12 bg-gray-100">
     <div className="w-4xl mx-auto">
@@ -33,7 +32,7 @@ const SuccessStory = () => {
             <div className="cursor-pointer mb-12">
               <img
                 className="h-72 w-full object-cover"
-                src={story.image}
+                src={story.coupleImage}
                 alt=""
               />
               <div className="mt-4 mb-1 flex justify-between items-center">

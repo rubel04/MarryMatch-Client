@@ -19,6 +19,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Payments from "../pages/Payments/Payments";
 import MyContactRequest from "../pages/Dashboard/MyContactRequest/MyContactRequest";
 import ApprovedContactRequest from "../pages/Dashboard/ApprovedContactRequest/ApprovedContactRequest";
+import GotMarried from "../pages/GotMarried/GotMarried";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // user route
       {
         path: "view-biodata",
         element: (
@@ -107,6 +109,9 @@ const router = createBrowserRouter([
             <MyContactRequest />
           </PrivateRoute>
         ),
+      },{
+        path: "got-married",
+        element: <PrivateRoute><GotMarried/></PrivateRoute>
       },
       // admin dashboard
       {
