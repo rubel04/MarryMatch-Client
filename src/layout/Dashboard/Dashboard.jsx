@@ -121,6 +121,21 @@ const Dashboard = () => {
                     Approve Contact Request
                   </NavLink>
                 </li>
+                <li className="font-medium rounded p-2 hover:bg-gray-50">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-[#d9383b] flex items-center gap-3"
+                        : "flex items-center gap-3"
+                    }
+                    to="/dashboard/success-story"
+                  >
+                    <span className="text-white bg-amber-500 text-xl p-1.5 rounded">
+                      <FaHandHoldingHand />
+                    </span>
+                    Success Story
+                  </NavLink>
+                </li>
               </div>
             ) : (
               // user menubar

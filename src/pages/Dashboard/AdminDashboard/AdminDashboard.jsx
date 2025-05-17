@@ -3,6 +3,7 @@ import { BiMaleFemale } from "react-icons/bi";
 import { FaDollarSign, FaFemale, FaMale } from "react-icons/fa";
 import { MdWorkspacePremium } from "react-icons/md";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Statistics from "../Statistics/Statistics";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -72,6 +73,8 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+
+      <Statistics stats={stats}/>
     </div>
   );
 };

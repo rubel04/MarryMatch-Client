@@ -1,6 +1,9 @@
+import { useLocation } from "react-router-dom";
+
 const Footer = () => {
+  const {pathname} = useLocation();
   return (
-    <footer className="bg-gradient-to-r from-[#d9383b] to-[#F1494C] text-gray-100">
+    <footer className={`${pathname !== '/about' && 'bg-gradient-to-r from-[#d9383b] to-[#F1494C] text-gray-100'} bg-gray-50 `}>
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
 
@@ -11,7 +14,7 @@ const Footer = () => {
                 alt="MarryMatch Logo"
                 className="w-10 h-10 rounded-full"
               />
-              <span className="text-xl font-semibold text-white">MarryMatch</span>
+              <span className="text-xl font-semibold ">MarryMatch</span>
             </div>
             <p className="text-sm">
               A trusted matrimonial platform helping people discover meaningful life partners with verified biodata and secure communication.

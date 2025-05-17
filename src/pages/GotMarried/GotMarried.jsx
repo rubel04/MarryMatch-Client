@@ -39,6 +39,7 @@ const GotMarried = () => {
     const data = {
       ...formData,
       partnerBiodataId: parseInt(formData.partnerBiodataId),
+      selfBiodataType: bioData?.biodataType,
     };
     axiosSecure
       .post("success-story", data)
