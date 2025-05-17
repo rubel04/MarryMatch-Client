@@ -117,7 +117,7 @@ const ViewBiodata = () => {
             {/* basic info */}
             <div className="flex-1 text-center md:text-left">
               <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
-              <p className="text-gray-500 text-sm mt-1 flex items-center gap-1">
+              <p className="text-gray-500 text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
                 Biodata ID: #{biodataId}{" "}
                 <span className="w-1.5 h-1.5 rounded-full inline-block bg-green-500"></span>{" "}
                 {biodataType}

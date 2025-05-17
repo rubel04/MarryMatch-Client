@@ -88,10 +88,10 @@ const BioDataDetails = () => {
   };
 
   return (
-    <div className="w-7xl mx-auto my-10">
+    <div className="md:w-7xl mx-auto md:my-10 mt-0 p-4 md:p-0">
       <div className="flex flex-col lg:flex-row items-center gap-8">
         {/* profile image */}
-        <div className="h-48 w-48 rounded-full overflow-hidden shadow-md">
+        <div className="h-32 md:h-48 w-32 md:w-48 rounded-full overflow-hidden shadow-md">
           <img
             className="w-full h-full object-cover"
             src={profileImage}
@@ -101,12 +101,12 @@ const BioDataDetails = () => {
         {/* basic info */}
         <div className="flex-1 text-center md:text-left">
           <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
-          <p className="text-gray-500 text-sm mt-1 flex items-center gap-1">
+          <p className="text-gray-500 text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
             Biodata ID: #{biodataId}{" "}
             <span className="w-1.5 h-1.5 rounded-full inline-block bg-green-500"></span>{" "}
             {biodataType}
           </p>
-          <div className="mt-4 text-sm flex flex-wrap gap-4 justify-center md:justify-start">
+          <div className="mt-4 text-xs md:text-sm flex flex-wrap gap-2 justify-center md:justify-start">
             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
               Age: {age}
             </span>
@@ -120,7 +120,7 @@ const BioDataDetails = () => {
         </div>
         {/* details */}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8 text-gray-700">
+      <div className="grid grid-cols-2 gap-6 mt-8 text-gray-700">
         <div>
           <h4 className="font-semibold mb-1 text-gray-600">Father's Name</h4>
           <p>{fathersName}</p>

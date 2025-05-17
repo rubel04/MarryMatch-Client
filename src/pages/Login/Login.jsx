@@ -35,10 +35,10 @@ const Login = () => {
 
   return (
     <div className="flex h-screen justify-center items-center">
-      <div className="text-sm shadow-xl py-6">
+      <div className="text-sm md:shadow-xl py-6">
         <form
           onSubmit={handleLoginUser}
-          className="flex max-w-sm w-sm flex-col gap-4 px-10"
+          className="flex max-w-sm md:w-sm flex-col gap-4 md:px-10"
         >
           <img
             className="w-22 m-auto"
@@ -90,7 +90,7 @@ const Login = () => {
           </button>
         </form>
         <p className="text-gray-600 text-center mt-4 mb-4">Or</p>
-        <div className="px-10">
+        <div className="md:px-10">
         <SocialLogin/>
         </div>
         <hr className="mb-4 mt-4 text-gray-300" />

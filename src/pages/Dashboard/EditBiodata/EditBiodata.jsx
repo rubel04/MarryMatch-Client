@@ -57,7 +57,7 @@ const EditBiodata = () => {
       });
   };
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 bg-gray-50 min-h-screen">
+    <div className="max-w-5xl mx-auto py-8 bg-gray-50 min-h-screen">
       {bioData && !isPending ? (
         <div>
           <h1 className="text-3xl font-bold">Edit Your Biodata</h1>

@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay,Pagination } from "swiper/modules";
 import "swiper/css";
+import 'swiper/css/pagination';
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import { MdOutlineUpdate } from "react-icons/md";
 import { Rating } from "@smastrom/react-rating";
@@ -17,8 +19,8 @@ const SuccessStory = () => {
     },
   });
   return (
-    <section className="mb-12 bg-gray-100">
-    <div className="w-4xl mx-auto">
+    <section className="mb-12 bg-gray-100 p-4 md:p-0">
+    <div className="md:w-4xl mx-auto">
       <div>
         <SectionHeading
           heading1="Success"
@@ -26,7 +28,13 @@ const SuccessStory = () => {
           highlight="second"
         />
       </div>
-      <Swiper className="mySwiper">
+      <Swiper autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }} 
+        pagination={true}
+        modules={[Autoplay,Pagination]}
+        className="mySwiper">
         {successStory.map((story) => (
           <SwiperSlide key={story._id}>
             <div className="cursor-pointer mb-12">
@@ -35,7 +43,7 @@ const SuccessStory = () => {
                 src={story.coupleImage}
                 alt=""
               />
-              <div className="mt-4 mb-1 flex justify-between items-center">
+              <div className="mt-4 mb-1 md:flex justify-between items-center">
                 <p className="flex items-center gap-1">
                   <MdOutlineUpdate /> Married on:{" "}
                   <span className="font-semibold text-gray-700 ml-1">
@@ -48,7 +56,7 @@ const SuccessStory = () => {
                   readOnly
                 />
               </div>
-              <p className="text-gray-700">{story.story}</p>
+              <p className="text-gray-700 mt-4 md:mt-0">{story.story}</p>
             </div>
           </SwiperSlide>
         ))}

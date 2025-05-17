@@ -74,9 +74,9 @@ const Statistics = (props) => {
 
   return (
     <div className="flex bg-white mt-8 py-4 gap-4 flex-wrap justify-center">
-      <div className="flex-1 min-w-[350px] flex flex-col items-center">
+      <div className="flex-1 min-w-[300px] flex flex-col items-center">
         <BarChart
-          width={500}
+          width={320}
           height={400}
           data={chartData}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
@@ -101,8 +101,8 @@ const Statistics = (props) => {
         </BarChart>
       </div>
 
-      <div className="flex-1 min-w-[350px] flex flex-col items-center">
-        <PieChart width={400} height={400}>
+      <div className="flex-1 min-w-[300px] flex flex-col items-center">
+        <PieChart width={300} height={400}>
           <Legend />
           <Pie
             data={chartData}

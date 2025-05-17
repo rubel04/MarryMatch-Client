@@ -16,7 +16,7 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [premiumRequest, refetch] = usePremiumRequest();
-  const { data: users = [] } = useQuery({
+  const { data: users = [],refetch:userUpdate } = useQuery({
     queryKey: ["users", search],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?search=${search}`);
@@ -42,6 +42,7 @@ const ManageUsers = () => {
                 text: "Make admin successfully",
                 icon: "success",
               });
+              userUpdate();
             }
           })
           .catch((err) => {
@@ -73,6 +74,38 @@ const ManageUsers = () => {
                 icon: "success",
               });
               refetch();
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              text: err.message,
+              icon: "success",
+            });
+          });
+      }
+    });
+  };
+
+  const handleRemoveAdmin = (email) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to remove admin privilege from this user.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/users/remove-admin?email=${email}`)
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              Swal.fire({
+                text: "Remove admin successfully",
+                icon: "success",
+              });
+              userUpdate();
             }
           })
           .catch((err) => {
@@ -128,7 +161,7 @@ const ManageUsers = () => {
                         user?.userEmail === req?.email && (
                           <button
                             onClick={() => handleMakePremium(user?.userEmail)}
-                            className="bg-yellow-600 text-white py-1 px-4 cursor-pointer rounded-full hover:bg-yellow-700 transition"
+                            className="bg-yellow-600 text-xs md:text-sm text-white py-1 w-30 cursor-pointer rounded-full hover:bg-yellow-700 transition"
                           >
                             Make Premium
                           </button>
@@ -136,12 +169,23 @@ const ManageUsers = () => {
                     )}
                   </TableCell>
                   <TableCell>
-                    <button
-                      onClick={() => handleMakeAdmin(user?.userEmail)}
-                      className="bg-blue-600 text-white py-1 px-4 cursor-pointer rounded-full hover:bg-blue-700 transition"
-                    >
-                      Make Admin
-                    </button>
+                    <TableCell>
+                      {user?.role === "admin" ? (
+                        <button
+                        onClick={() => handleRemoveAdmin(user?.userEmail)}
+                          className="bg-red-600 text-xs md:text-sm text-white py-1 w-30 cursor-pointer rounded-full hover:bg-red-700 transition"
+                        >
+                          Remove Admin
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleMakeAdmin(user?.userEmail)}
+                          className="bg-blue-600 text-xs md:text-sm text-white py-1 w-30 cursor-pointer rounded-full hover:bg-blue-700 transition"
+                        >
+                          Make Admin
+                        </button>
+                      )}
+                    </TableCell>
                   </TableCell>
                 </TableRow>
               ))}

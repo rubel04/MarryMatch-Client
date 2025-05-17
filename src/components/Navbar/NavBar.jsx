@@ -34,7 +34,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-7xl mx-auto">
+    <div className="md:w-7xl mx-auto">
       <Navbar
       // TODO: set navbar background color when user not have home page bg-[#F1494C]
         className={`${pathname !== "/" ? " mt-4" : "bg-none"}`}

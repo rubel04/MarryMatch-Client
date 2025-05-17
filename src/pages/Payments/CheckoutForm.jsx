@@ -85,6 +85,7 @@ const CheckoutForm = () => {
           biodataId: bioData?.biodataId,
           name: bioData?.name,
           email: bioData?.email,
+          userName: user?.displayName,
           userEmail: user?.email,
           mobile: bioData?.mobile,
           price: price,

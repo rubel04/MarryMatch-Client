@@ -52,17 +52,15 @@ const MyContactRequest = () => {
                   <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {user?.name}
                   </TableCell>
-                  {/* <TableCell>{user?.status === "Approved" ? user?.email : "No-access"}</TableCell>
-                  <TableCell>{user?.status === "Approved" ? user?.email : "No-access"}</TableCell> */}
                   <TableCell
                     className={`${user?.status !== "Approved" && "blur-xs"}`}
                   >
-                    {user?.email}
+                    {user?.status === "Approved" ? user?.email : "contact@gmail.com"}
                   </TableCell>
                   <TableCell
                     className={`${user?.status !== "Approved" && "blur-xs"}`}
                   >
-                    {user?.mobile}
+                    {user?.status === "Approved" ? user?.mobile : "017*********04"}
                   </TableCell>
                   <TableCell
                     className={`${

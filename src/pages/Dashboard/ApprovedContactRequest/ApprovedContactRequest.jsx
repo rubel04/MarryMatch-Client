@@ -21,11 +21,11 @@ const ApprovedContactRequest = () => {
       return res.data;
     },
   });
-  const handleRequestApproved = ( email) => {
+  const handleRequestApproved = ( id) => {
       axiosSecure
-        .patch(`/approved-contact-request?email=${email}`)
+        .patch(`/approved-contact-request?id=${id}`)
         .then((res) => {
-        //   console.log(res.data);
+          console.log(res.data);
           if (res.data?.modifiedCount > 0) {
             Swal.fire({
               title: "Approved",
@@ -72,14 +72,14 @@ const ApprovedContactRequest = () => {
                       #{req.biodataId}
                     </TableCell>
                     <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                      {req?.name}
+                      {req?.userName}
                     </TableCell>
-                    <TableCell>{req?.email}</TableCell>
+                    <TableCell>{req?.userEmail}</TableCell>
 
                     <TableCell>
                       <button
                         onClick={() =>
-                          handleRequestApproved(req?.email)
+                          handleRequestApproved(req?._id)
                         }
                         className="bg-blue-600 text-white py-1 px-2 cursor-pointer font-medium rounded hover:bg-blue-700 transition"
                       >

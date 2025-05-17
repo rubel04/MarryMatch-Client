@@ -28,9 +28,9 @@ const BioDatas = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-4 w-7xl mx-auto my-12">
+    <div className="grid grid-cols-4 gap-4 md:w-7xl mx-auto mb-12 md:mt-12 p-4 md:p-0">
       {/* filter option */}
-      <div className="col-span-1">
+      <div className="col-span-4 md:col-span-1">
         <div className="border-2 border-gray-200 rounded px-2 pt-6 pb-12">
           <h3 className="text-xl text-[#F1494C] font-medium text-center mb-1">
             Find your special someone
@@ -48,8 +48,6 @@ const BioDatas = () => {
                 Biodata Type:
               </label>
               <select
-                //   onChange={(e) => setSortOrder(e.target.value)}
-                //   value={sortOrder}
                 className="border-2 border-gray-200 rounded w-full text-sm py-1.5 pr-12 pl-2"
                 name="bioDataType"
                 id=""
@@ -123,7 +121,7 @@ const BioDatas = () => {
         </div>
       </div>
       {/* bio data card */}
-      <div className="col-span-3">
+      <div className="col-span-4 md:col-span-3">
         {isPending ? (
           <div className="animate-pulse grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="h-24 md:h-42 text-gray-800 bg-gray-200 rounded w-full flex items-center justify-center">

@@ -16,7 +16,7 @@ const PremiumMembers = () => {
   });
 
   return (
-    <div className="w-7xl mx-auto mb-12">
+    <div className="md:w-7xl mx-auto mb-12 p-4 md:p-0">
       <SectionHeading heading1="Our Premium" heading2="Members" desc="Connect. Match. Marry." highlight="second" />
       <div className="mb-8">
         <label htmlFor="sort" className="block mb-2 font-medium text-gray-800">

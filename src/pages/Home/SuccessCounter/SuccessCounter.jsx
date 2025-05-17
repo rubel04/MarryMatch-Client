@@ -14,14 +14,14 @@ const SuccessCounter = () => {
   });
 
   return (
-    <section className="w-6xl mx-auto my-16">
+    <section className="md:w-6xl mx-auto my-16 p-4 md:p-0">
       <SectionHeading
         heading1="Our Journey"
         heading2="So Far"
         desc="Our journey with MarryMatch has been about connecting hearts"
         highlight="first"
       />
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-12 gap-6">
         <div className="bg-teal-400 text-white py-12 flex items-center justify-center gap-4 rounded-xl">
           <span className="text-6xl">
             <FaMale />
