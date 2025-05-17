@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 const Footer = () => {
   const {pathname} = useLocation();
   return (
-    <footer className={`${pathname !== '/about' && 'bg-gradient-to-r from-[#d9383b] to-[#F1494C] text-gray-100'} bg-gray-50 `}>
+    <footer className={`${pathname !== '/about' && pathname !== '/contact' && 'bg-gradient-to-r from-[#d9383b] to-[#F1494C] text-gray-100'} bg-gray-50 `}>
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
 

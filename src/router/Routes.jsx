@@ -22,6 +22,7 @@ import ApprovedContactRequest from "../pages/Dashboard/ApprovedContactRequest/Ap
 import GotMarried from "../pages/GotMarried/GotMarried";
 import SuccessStory from "../pages/Dashboard/SuccessStory/SuccessStory";
 import AboutUs from "../pages/AboutUs/AboutUs";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs/>
+      },
+      {
+        path: "/contact",
+        element: <ContactUs/>
       }
     ],
     errorElement: <ErrorPage />,
