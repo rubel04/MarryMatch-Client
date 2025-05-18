@@ -2,7 +2,7 @@ import { FaHeart, FaMale, FaFemale } from "react-icons/fa";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-
+import CountUp from 'react-countup';
 const SuccessCounter = () => {
   const axiosPublic = useAxiosPublic();
   const { data: count = [] } = useQuery({
@@ -27,7 +27,7 @@ const SuccessCounter = () => {
             <FaMale />
           </span>
           <div>
-            <h2 className="text-5xl font-bold text-white">{count.male}+</h2>
+            <h2 className="text-5xl font-bold text-white"><CountUp end={count.male} duration={3} />+</h2>
             <p>Male</p>
           </div>
         </div>
@@ -36,7 +36,8 @@ const SuccessCounter = () => {
             <FaFemale />
           </span>
           <div>
-            <h2 className="text-5xl font-bold text-white">{count.female}+</h2>
+            
+            <h2 className="text-5xl font-bold text-white"><CountUp end={count.female} duration={3} />+</h2>
             <p>Female</p>
           </div>
         </div>
@@ -45,7 +46,7 @@ const SuccessCounter = () => {
             <FaHeart className="text-red-600" />
           </span>
           <div>
-            <h2 className="text-5xl font-bold text-white">{count.marriage}</h2>
+            <h2 className="text-5xl font-bold text-white"><CountUp end={count.marriage} duration={3} /></h2>
             <p>Successful Marriages </p>
           </div>
         </div>
