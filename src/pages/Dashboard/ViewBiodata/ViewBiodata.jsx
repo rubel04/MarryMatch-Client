@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import NoData from "../../../components/NoData/NoData";
 import useAdmin from "../../../hooks/useAdmin";
 import { FaCrown } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const ViewBiodata = () => {
   const [isPremiumUser] = usePremiumUser();
@@ -85,6 +86,9 @@ const ViewBiodata = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>View My Biodata | Dashboard | Marry Match</title>
+      </Helmet>
       {bioData && !isPending ? (
         <div>
           <div className="flex flex-col lg:flex-row items-center gap-8">

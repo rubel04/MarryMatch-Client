@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -77,7 +78,7 @@ const CheckoutForm = () => {
         text: confirmError.message,
         timer: 2000,
       });
-      setProcessing(false)
+      setProcessing(false);
     } else {
       // console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
@@ -110,6 +111,9 @@ const CheckoutForm = () => {
 
   return (
     <div className="h-screen flex items-center justify-center">
+      <Helmet>
+        <title>Complete Your Payment | Checkout | Marry Match</title>
+      </Helmet>
       <form
         onSubmit={handleSubmit}
         className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"

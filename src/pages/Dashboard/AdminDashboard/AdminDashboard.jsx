@@ -4,6 +4,7 @@ import { FaDollarSign, FaFemale, FaMale } from "react-icons/fa";
 import { MdWorkspacePremium } from "react-icons/md";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Statistics from "../Statistics/Statistics";
+import { Helmet } from "react-helmet";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,6 +17,9 @@ const AdminDashboard = () => {
   });
   return (
     <div>
+      <Helmet>
+        <title>Dashboard Overview | Marry Match</title>
+      </Helmet>
       <div>
         <h2 className="text-3xl font-medium text-gray-800">
           Biodata & Revenue Overview

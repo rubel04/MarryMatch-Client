@@ -3,6 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import BioDataCard from "../../components/BioDataCard/BioDataCard";
 import { useState } from "react";
 import NoData from "../../components/NoData/NoData";
+import { Helmet } from "react-helmet";
 
 const BioDatas = () => {
   const axiosPublic = useAxiosPublic();
@@ -29,6 +30,9 @@ const BioDatas = () => {
 
   return (
     <div className="grid grid-cols-4 gap-4 md:w-7xl mx-auto mb-12 md:mt-12 p-4 md:p-0">
+      <Helmet>
+        <title>Browse All Matrimony Biodata | Marry Match</title>
+      </Helmet>
       {/* filter option */}
       <div className="col-span-4 md:col-span-1">
         <div className="border-2 border-gray-200 rounded px-2 pt-6 pb-12">

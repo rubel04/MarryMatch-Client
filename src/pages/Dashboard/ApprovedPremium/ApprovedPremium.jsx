@@ -10,6 +10,7 @@ import {
 import Swal from "sweetalert2";
 import NoData from "../../../components/NoData/NoData";
 import usePremiumRequest from "../../../hooks/usePremiumRequest";
+import { Helmet } from "react-helmet";
 
 const ApprovedPremium = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,6 +66,9 @@ const ApprovedPremium = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Approve Premium Request | Dashboard | Marry Match</title>
+      </Helmet>
       <h2 className="text-3xl font-medium">All Premium Member Request</h2>
       <p className="text-gray-8700 mt-1">
         Review all user requests for premium membership. You can approve or{" "}

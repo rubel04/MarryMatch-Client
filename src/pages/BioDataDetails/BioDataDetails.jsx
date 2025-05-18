@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import usePremiumUser from "../../hooks/usePremiumUser";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const BioDataDetails = () => {
   const { id } = useParams();
@@ -89,6 +90,9 @@ const BioDataDetails = () => {
 
   return (
     <div className="md:w-7xl mx-auto md:my-10 mt-0 p-4 md:p-0">
+      <Helmet>
+        <title>Full Biodata Details | Marry Match</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row items-center gap-8">
         {/* profile image */}
         <div className="h-32 md:h-48 w-32 md:w-48 rounded-full overflow-hidden shadow-md">

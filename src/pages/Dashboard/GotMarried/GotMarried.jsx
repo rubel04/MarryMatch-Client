@@ -1,9 +1,10 @@
 import { useState } from "react";
-import useViewBiodata from "../../hooks/useViewBiodata";
+import useViewBiodata from "../../../hooks/useViewBiodata";
 import { Rating } from "@smastrom/react-rating";
 import { MdOutlineUpdate } from "react-icons/md";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const GotMarried = () => {
   const [bioData] = useViewBiodata();
@@ -64,6 +65,9 @@ const GotMarried = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-4 pt-0">
+      <Helmet>
+        <title>Share Your Success Story | Got Married | Dashboard | Marry Match</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mt-3 mb-6">
         Share Your Marriage Story
       </h2>

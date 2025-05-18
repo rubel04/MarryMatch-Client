@@ -10,7 +10,7 @@ import NoData from "../../../components/NoData/NoData";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import { MdOutlineUpdate } from "react-icons/md";
+import { Helmet } from "react-helmet";
 const SuccessStory = () => {
   const axiosSecure = useAxiosSecure();
   const { data: stories = [] } = useQuery({
@@ -43,6 +43,9 @@ const SuccessStory = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Explore All Success Story | Dashboard | Marry Match</title>
+      </Helmet>
       <h2 className="text-3xl font-medium">Success Stories</h2>
       <p className="text-gray-8700 mt-1">
         Explore the success stories with matched Male and Female Biodata IDs.{" "}

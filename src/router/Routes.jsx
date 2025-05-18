@@ -19,7 +19,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Payments from "../pages/Payments/Payments";
 import MyContactRequest from "../pages/Dashboard/MyContactRequest/MyContactRequest";
 import ApprovedContactRequest from "../pages/Dashboard/ApprovedContactRequest/ApprovedContactRequest";
-import GotMarried from "../pages/GotMarried/GotMarried";
+import GotMarried from "../pages/Dashboard/GotMarried/GotMarried";
 import SuccessStory from "../pages/Dashboard/SuccessStory/SuccessStory";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";

@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "flowbite-react";
 import NoData from "../../../components/NoData/NoData";
+import { Helmet } from "react-helmet";
 
 const MyContactRequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -23,6 +24,9 @@ const MyContactRequest = () => {
   });
   return (
     <div>
+      <Helmet>
+        <title>My Contact Request| Dashboard | Marry Match</title>
+      </Helmet>
       <h2 className="text-3xl font-medium">My Contact Request</h2>
       <p className="text-gray-700 mt-1">
         Here you can see all the biodata contact requests you’ve made. Pending

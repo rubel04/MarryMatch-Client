@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import Swal from "sweetalert2";
 import usePremiumRequest from "../../../hooks/usePremiumRequest";
+import { Helmet } from "react-helmet";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -119,6 +120,9 @@ const ManageUsers = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Manage Users | Dashboard | Marry Match</title>
+      </Helmet>
       <h2 className="text-3xl font-medium">All registered users</h2>
       <p className="text-gray-8700 mt-1">
         Admin overview of all registered users. You can manage user roles and{" "}

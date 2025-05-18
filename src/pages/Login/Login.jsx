@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet";
 const Login = () => {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const handleLoginUser = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -21,13 +22,13 @@ const Login = () => {
             timer: 1500,
           });
           form.reset();
-          state? navigate(state) : navigate("/");
+          state ? navigate(state) : navigate("/");
         }
       })
       .catch(() => {
         Swal.fire({
           icon: "error",
-          title: "Something went wrong!",
+          title: "Wrong email or password",
           timer: 1500,
         });
       });
@@ -35,6 +36,9 @@ const Login = () => {
 
   return (
     <div className="flex h-screen justify-center items-center">
+      <Helmet>
+        <title>Member Login - Marry Match</title>
+      </Helmet>
       <div className="text-sm md:shadow-xl py-6">
         <form
           onSubmit={handleLoginUser}
@@ -91,7 +95,7 @@ const Login = () => {
         </form>
         <p className="text-gray-600 text-center mt-4 mb-4">Or</p>
         <div className="md:px-10">
-        <SocialLogin/>
+          <SocialLogin />
         </div>
         <hr className="mb-4 mt-4 text-gray-300" />
         <p className="text-center">

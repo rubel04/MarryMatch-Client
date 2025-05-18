@@ -11,6 +11,7 @@ import {
 } from "flowbite-react";
 import Swal from "sweetalert2";
 import NoData from "../../../components/NoData/NoData";
+import { Helmet } from "react-helmet";
 
 const FavoriteBiodata = () => {
   const axiosSecure = useAxiosSecure();
@@ -49,6 +50,9 @@ const FavoriteBiodata = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Explore Your Favourites Biodata | Dashboard | Marry Match</title>
+      </Helmet>
       {favoriteBiodata.length !== 0 ? (
         <div className="overflow-x-auto">
           <Table hoverable>

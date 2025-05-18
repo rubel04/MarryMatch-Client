@@ -10,6 +10,7 @@ import {
 } from "flowbite-react";
 import Swal from "sweetalert2";
 import NoData from "../../../components/NoData/NoData";
+import { Helmet } from "react-helmet";
 
 const ApprovedContactRequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -46,6 +47,9 @@ const ApprovedContactRequest = () => {
     };
   return (
     <div>
+      <Helmet>
+        <title>Approve Contact Request | Dashboard | Marry Match</title>
+      </Helmet>
       <h2 className="text-3xl font-medium">All Contact Request</h2>
       <p className="text-gray-700 mt-1">
         View all user contact requests here. Review each request and approve <br /> to grant access to contact information.

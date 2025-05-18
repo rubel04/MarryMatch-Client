@@ -2,11 +2,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
 const Register = () => {
   const { registerUser, updateUser } = useAuth();
   const navigate = useNavigate();
   const { state } = useLocation();
   const axiosPublic = useAxiosPublic();
+  const [registerError, setRegisterError] = useState("");
 
   const handleRegisterUser = (event) => {
     event.preventDefault();
@@ -16,7 +19,16 @@ const Register = () => {
     const image = form.image.value;
     const password = form.password.value;
     const userData = { userName: name, userEmail: email, role: "user" };
-    console.log(userData);
+
+    setRegisterError("");
+    if (password.length < 6) {
+      return setRegisterError("Password must be at least 6 characters");
+    } else if (!/[a-z]/.test(password)) {
+      return setRegisterError("Must have a Lowercase letter in the password");
+    } else if (!/[A-Z]/.test(password)) {
+      return setRegisterError("Must have an Uppercase letter in the password");
+    }
+
     registerUser(email, password)
       .then((data) => {
         console.log(data.user);
@@ -36,6 +48,7 @@ const Register = () => {
         });
       })
       .catch((err) => {
+        console.log(err);
         Swal.fire({
           icon: "error",
           title: err.message,
@@ -45,6 +58,9 @@ const Register = () => {
   };
   return (
     <div className="flex h-screen justify-center items-center">
+      <Helmet>
+        <title>Register Your Account | Marry Match</title>
+      </Helmet>
       <form
         onSubmit={handleRegisterUser}
         className="flex max-w-sm w-sm flex-col gap-4 shadow-xl px-10 py-6 text-sm"
@@ -96,6 +112,7 @@ const Register = () => {
             required
           />
         </div>
+        <span className="text-red-700">{registerError}</span>
         <button
           className="p-2 bg-[#F1494C] rounded text-white font-medium cursor-pointer"
           type="submit"

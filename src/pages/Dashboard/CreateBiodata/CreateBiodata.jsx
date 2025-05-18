@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const CreateBiodata = () => {
   const { user } = useAuth();
@@ -36,6 +37,9 @@ const CreateBiodata = () => {
   };
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 bg-gray-50 min-h-screen">
+      <Helmet>
+        <title>Create Your Biodata | Marry Match</title>
+      </Helmet>
       <div>
         <h1 className="text-3xl font-bold">Create Your Biodata</h1>
         <p className="mb-8 mt-1 text-gray-700">

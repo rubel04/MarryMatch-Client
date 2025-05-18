@@ -4,6 +4,7 @@ import useViewBiodata from "../../../hooks/useViewBiodata";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import NoData from "../../../components/NoData/NoData";
+import { Helmet } from "react-helmet";
 
 const EditBiodata = () => {
   const { user } = useAuth();
@@ -58,6 +59,9 @@ const EditBiodata = () => {
   };
   return (
     <div className="max-w-5xl mx-auto py-8 bg-gray-50 min-h-screen">
+      <Helmet>
+        <title>Edit My Biodata | Dashboard | Marry Match</title>
+      </Helmet>
       {bioData && !isPending ? (
         <div>
           <h1 className="text-3xl font-bold">Edit Your Biodata</h1>

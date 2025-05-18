@@ -14,7 +14,7 @@ const Footer = () => {
                 alt="MarryMatch Logo"
                 className="w-10 h-10 rounded-full"
               />
-              <span className="text-xl font-semibold ">MarryMatch</span>
+              <span className="text-xl font-semibold ">Marry Match</span>
             </div>
             <p className="text-sm">
               A trusted matrimonial platform helping people discover meaningful life partners with verified biodata and secure communication.

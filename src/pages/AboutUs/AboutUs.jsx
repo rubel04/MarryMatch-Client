@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet";
+
 const AboutUs = () => {
   return (
     <div className="bg-white text-gray-800">
+      <Helmet>
+        <title>About Us | Marry Match</title>
+      </Helmet>
       <section className="bg-gradient-to-r from-[#F1494C] to-pink-500 text-white py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl md:text-4xl font-bold mb-4">
