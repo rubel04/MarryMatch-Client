@@ -30,11 +30,9 @@ const Register = () => {
     }
 
     registerUser(email, password)
-      .then((data) => {
-        console.log(data.user);
+      .then(() => {
         updateUser({ name, image }).then(() => {
           axiosPublic.post("/users", userData).then((res) => {
-            console.log(res.data);
             if (res.data.insertedId) {
               Swal.fire({
                 icon: "success",
@@ -48,7 +46,6 @@ const Register = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
         Swal.fire({
           icon: "error",
           title: err.message,

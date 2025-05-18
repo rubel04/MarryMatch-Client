@@ -18,7 +18,6 @@ const SocialLogin = () => {
           role: "user",
         };
         axiosPublic.post("/users", userData).then((res) => {
-          // console.log(res.data);
           if (res.data.insertedId) {
             Swal.fire({
               title: "Account login successfully!",

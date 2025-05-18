@@ -33,7 +33,6 @@ const BioDataDetails = () => {
     },
   });
 
-  // console.log(similarBiodata);
 
   const {
     biodataId,

@@ -50,7 +50,6 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      console.log("payment error", error);
       Swal.fire({
         icon: "error",
         text: error.message,
@@ -80,7 +79,6 @@ const CheckoutForm = () => {
       });
       setProcessing(false);
     } else {
-      // console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
           biodataId: bioData?.biodataId,

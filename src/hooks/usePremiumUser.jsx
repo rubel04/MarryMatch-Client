@@ -9,7 +9,6 @@ const usePremiumUser = () => {
     queryKey: [user?.email, "isPremiumUser"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/premium?email=${user?.email}`);
-      // console.log("premium user:", res.data?.premium);
       return res.data?.premium;
     },
   });

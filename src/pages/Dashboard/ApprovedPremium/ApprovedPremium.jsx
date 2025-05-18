@@ -16,11 +16,9 @@ const ApprovedPremium = () => {
   const axiosSecure = useAxiosSecure();
   const [premiumRequest,refetch] = usePremiumRequest();
   const handleRequestApproved = (status, email) => {
-    // console.log(email)
     axiosSecure
       .patch(`/users/premium-request?email=${email}`, { status })
       .then((res) => {
-        console.log(res.data);
         if (res.data?.modifiedCount > 0) {
           Swal.fire({
             title: "Approved",
@@ -40,11 +38,9 @@ const ApprovedPremium = () => {
       });
   };
   const handleRequestReject = (status, email) => {
-    // console.log(email)
     axiosSecure
       .patch(`/users/premium-request?email=${email}`, { status })
       .then((res) => {
-        console.log(res.data);
         if (res.data?.modifiedCount > 0) {
           Swal.fire({
             title: "Rejected",

@@ -26,7 +26,6 @@ const ApprovedContactRequest = () => {
       axiosSecure
         .patch(`/approved-contact-request?id=${id}`)
         .then((res) => {
-          console.log(res.data);
           if (res.data?.modifiedCount > 0) {
             Swal.fire({
               title: "Approved",

@@ -25,28 +25,39 @@ const FavoriteBiodata = () => {
       return res.data;
     },
   });
-  //   TODO: make confirm modal delete button
+
   const handleDeleteFavouriteBiodata = (id) => {
-    axiosSecure
-      .delete(`/favoriteBiodata/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.deletedCount > 0) {
-          Swal.fire({
-            title: "Biodata deleted to the favorite list",
-            icon: "success",
-            timer: 2000,
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this favourite biodata.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/favoriteBiodata/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Biodata deleted to the favorite list",
+                icon: "success",
+                timer: 2000,
+              });
+              refetch();
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              title: "Something went wrong",
+              icon: "error",
+              timer: 2000,
+            });
           });
-          refetch();
-        }
-      })
-      .catch(() => {
-        Swal.fire({
-          title: "Something went wrong",
-          icon: "error",
-          timer: 2000,
-        });
-      });
+      }
+    });
   };
   return (
     <div>
@@ -80,7 +91,7 @@ const FavoriteBiodata = () => {
                   <TableCell>
                     <button
                       onClick={() =>
-                        handleDeleteFavouriteBiodata(biodata?.biodataId)
+                        handleDeleteFavouriteBiodata(biodata?._id)
                       }
                       className="bg-red-500 text-white py-1 px-2 cursor-pointer font-medium rounded hover:bg-red-600 transition"
                     >

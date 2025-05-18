@@ -17,7 +17,6 @@ const CreateBiodata = () => {
     axiosSecure
       .post("/biodata", newBiodata)
       .then((res) => {
-        // console.log(res);
         if(res.data?.result?.insertedId){
           Swal.fire({
             title: ` Biodata created successfully!`,

@@ -14,7 +14,6 @@ const Login = () => {
     const password = form.password.value;
     loginUser(email, password)
       .then((data) => {
-        console.log(data.user);
         if (data.user) {
           Swal.fire({
             icon: "success",
